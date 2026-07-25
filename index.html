@@ -78,10 +78,13 @@
   }
 
   .wrap{max-width:820px;margin:0 auto;padding:48px 24px 80px;position:relative;z-index:1}
-  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px;padding:28px 28px 24px;margin-bottom:8px;
+  header{position:relative;padding:28px 150px 24px 28px;margin-bottom:8px;
     background:color-mix(in srgb, var(--surface) 65%, transparent);
     backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%);
     border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow);
+  }
+  @media (max-width:560px){
+    header{padding:28px 28px 88px}
   }
   h1{
     font-size:2.3rem;margin:0 0 4px;font-weight:700;opacity:0;animation:riseIn .6s ease-out .1s forwards;
@@ -100,11 +103,19 @@
   .contacts a{color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:4px 10px;border-radius:20px;transition:transform .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;display:inline-block}
   .contacts a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
 
-  .print-btn{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:0.85rem;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+  .print-btn{position:absolute;top:24px;right:24px;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:0.85rem;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;white-space:nowrap}
   .print-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(10,92,216,.3)}
+  @media (max-width:560px){
+    .print-btn{top:auto;bottom:24px;left:28px;right:28px}
+  }
 
-  nav.pillnav{position:sticky;top:0;z-index:20;display:flex;gap:6px;flex-wrap:wrap;padding:10px 0;margin-bottom:28px;background:linear-gradient(var(--bg),var(--bg) 70%,transparent)}
-  nav.pillnav a{position:relative;font-size:.82rem;font-family:var(--font-mono);color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);transition:.15s ease}
+  nav.pillnav{position:sticky;top:16px;z-index:20;display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;margin:0 0 28px;
+    background:color-mix(in srgb, var(--surface) 55%, transparent);
+    backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+    width:fit-content; max-width:100%;
+  }
+  nav.pillnav a{position:relative;font-size:.82rem;font-family:var(--font-mono);color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;background:transparent;border:1px solid transparent;transition:.15s ease}
   nav.pillnav a:hover{color:var(--accent);border-color:var(--accent)}
   nav.pillnav a.active{color:#fff;border-color:transparent;background:linear-gradient(120deg,var(--accent),var(--accent2))}
 
