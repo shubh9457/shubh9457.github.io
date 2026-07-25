@@ -5,15 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubh Saxena — Resume</title>
 <meta name="description" content="Shubh Saxena — Lead Engineer, distributed systems & high-scale architecture. Resume.">
+<link rel="canonical" href="https://shubh9457.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230a0e12'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%237ee787' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" id="theme-color-meta" content="#0a0e12">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shubh9457.github.io/">
+<meta property="og:title" content="Shubh Saxena — Resume">
+<meta property="og:description" content="Lead Engineer, distributed systems & high-scale architecture. Resume.">
+<meta property="og:image" content="https://shubh9457.github.io/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shubh Saxena — Resume">
+<meta name="twitter:description" content="Lead Engineer, distributed systems & high-scale architecture. Resume.">
+<meta name="twitter:image" content="https://shubh9457.github.io/og-image.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shubh Saxena",
+  "jobTitle": "Lead Engineer",
+  "url": "https://shubh9457.github.io/",
+  "sameAs": [
+    "https://www.linkedin.com/in/shubh-saxena/",
+    "https://github.com/shubh9457",
+    "https://medium.com/@shubhsaxena",
+    "https://leetcode.com/shubhsaxena/"
+  ]
+}
+</script>
 <script>
 (function(){
   try{
     var saved = localStorage.getItem('theme');
     var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', theme);
+    var tcm = document.getElementById('theme-color-meta');
+    if (tcm) tcm.setAttribute('content', theme === 'light' ? '#f3f4f6' : '#0a0e12');
   }catch(e){}
 })();
 </script>
@@ -188,7 +217,7 @@
 
   <header class="term">
     <div class="term-bar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
       <span class="term-title">shubh@resume — zsh</span>
       <button class="print-btn" onclick="window.print()">./download-resume.sh</button>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">
@@ -371,6 +400,8 @@
     var isLight = document.documentElement.getAttribute('data-theme') === 'light';
     toggleBtn.setAttribute('aria-pressed', String(isLight));
     icon.textContent = isLight ? '☀️' : '🌙';
+    var tcm = document.getElementById('theme-color-meta');
+    if (tcm) tcm.setAttribute('content', isLight ? '#f3f4f6' : '#0a0e12');
   }
   syncToggle();
   toggleBtn.addEventListener('click', function(){
@@ -396,7 +427,8 @@
   var topBtn = document.getElementById('top-btn');
   function onScroll(){
     var h = document.documentElement;
-    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
     progress.style.width = pct + '%';
     topBtn.classList.toggle('show', h.scrollTop > 400);
   }
@@ -468,7 +500,11 @@
       entries.forEach(function(entry){
         var id = entry.target.getAttribute('id');
         var link = document.querySelector('nav.tabbar a[href="#' + id + '"]');
-        if (link) link.classList.toggle('active', entry.isIntersecting);
+        if (link) {
+          link.classList.toggle('active', entry.isIntersecting);
+          if (entry.isIntersecting) { link.setAttribute('aria-current', 'page'); }
+          else { link.removeAttribute('aria-current'); }
+        }
       });
     }, {rootMargin:'-35% 0px -55% 0px'});
     sections.forEach(function(s){ navIo.observe(s); });
