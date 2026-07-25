@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  }catch(e){}
+})();
+</script>
 <style>
   :root{
     --bg:#0a0e12; --panel:#10151b; --panel-head:#161c24; --border:#232a33;
@@ -15,6 +24,14 @@
     --key:#9cdcfe; --string:#ce9178; --comment:#6a9955; --warn:#ffcb6b; --red:#ff6161;
     --shadow:0 8px 24px rgba(0,0,0,.35);
   }
+  :root[data-theme="light"]{
+    --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
+    --fg:#20262e; --muted:#5c6572; --accent:#1a7f37; --accent-dim:#116329;
+    --key:#0550ae; --string:#953800; --comment:#59873a; --warn:#9a6700; --red:#cf222e;
+    --shadow:0 8px 24px rgba(20,25,35,.08);
+  }
+  html,body{transition:background-color .25s ease, color .25s ease}
+  .term,.term-bar,nav.tabbar,#top-btn{transition:background-color .25s ease, border-color .25s ease, box-shadow .25s ease}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   html,body{margin:0;padding:0}
@@ -41,6 +58,14 @@
     animation:scan 9s linear infinite;
     opacity:.5;
   }
+  :root[data-theme="light"] #bgfx::before{
+    background-image:
+      linear-gradient(rgba(0,0,0,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px);
+  }
+  :root[data-theme="light"] #bgfx::after{
+    background:repeating-linear-gradient(0deg, rgba(0,0,0,.012) 0px, rgba(0,0,0,.012) 1px, transparent 1px, transparent 3px);
+  }
   @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(3px)}}
   @media (prefers-reduced-motion: reduce){ #bgfx::after{animation:none} }
 
@@ -57,8 +82,17 @@
   .term-body{padding:22px 26px}
 
   header.term{position:relative}
-  .print-btn{position:absolute;top:9px;right:14px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
+  .print-btn{position:absolute;top:9px;right:80px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
   .print-btn:hover{background:var(--accent);color:#08130a}
+
+  .theme-toggle{position:absolute;top:8px;right:14px;width:52px;height:24px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer;padding:0;display:flex;align-items:center;transition:background-color .3s ease,border-color .3s ease}
+  .theme-toggle .thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);margin-left:2px;display:flex;align-items:center;justify-content:center;font-size:11px;transform:translateX(0);transition:transform .3s cubic-bezier(.4,0,.2,1),background-color .3s ease;line-height:1}
+  :root[data-theme="light"] .theme-toggle .thumb{transform:translateX(28px)}
+  .theme-toggle .thumb .icon{display:inline-block;transition:transform .35s ease, opacity .25s ease}
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .thumb, .theme-toggle{transition:none}
+    .theme-toggle .thumb .icon{transition:none}
+  }
 
   .prompt{color:var(--accent)}
   .prompt::before{content:'$ ';color:var(--muted)}
@@ -125,12 +159,13 @@
 
   @media (max-width:560px){
     .term-body{padding:18px 16px}
-    .print-btn{position:static;margin-top:10px;display:inline-block}
+    .print-btn{position:static;margin-top:10px;margin-right:8px;display:inline-block}
+    .theme-toggle{position:static;margin-top:10px;vertical-align:middle}
     header .term-bar{flex-wrap:wrap}
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,nav.tabbar,.cursor{display:none}
+    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff}
     .term-bar{background:#f3f3f3}
@@ -152,6 +187,9 @@
       <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
       <span class="term-title">shubh@resume — zsh</span>
       <button class="print-btn" onclick="window.print()">./download-resume.sh</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">
+        <span class="thumb"><span class="icon" id="theme-icon">🌙</span></span>
+      </button>
     </div>
     <div class="term-body">
       <div id="boot"></div>
@@ -319,6 +357,33 @@
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // theme toggle
+  var toggleBtn = document.getElementById('theme-toggle');
+  var icon = document.getElementById('theme-icon');
+  function syncToggle(){
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    toggleBtn.setAttribute('aria-pressed', String(isLight));
+    icon.textContent = isLight ? '☀️' : '🌙';
+  }
+  syncToggle();
+  toggleBtn.addEventListener('click', function(){
+    var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (!reduce) {
+      icon.style.transform = 'rotate(90deg) scale(.4)';
+      icon.style.opacity = '0';
+      setTimeout(function(){
+        document.documentElement.setAttribute('data-theme', next);
+        syncToggle();
+        icon.style.transform = 'rotate(0deg) scale(1)';
+        icon.style.opacity = '1';
+      }, 160);
+    } else {
+      document.documentElement.setAttribute('data-theme', next);
+      syncToggle();
+    }
+    try{ localStorage.setItem('theme', next); }catch(e){}
+  });
 
   // scroll progress + back-to-top
   var progress = document.getElementById('progress');
