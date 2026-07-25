@@ -54,6 +54,7 @@
     --key:#9cdcfe; --string:#ce9178; --comment:#6a9955; --warn:#ffcb6b; --red:#ff6161;
     --shadow:0 8px 24px rgba(0,0,0,.35); --hover-overlay:rgba(255,255,255,.03);
     --chip-bg:rgba(126,231,135,.12);
+    --code-cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='18'%3E%3Crect width='2' height='18' fill='%237ee787'/%3E%3C/svg%3E") 2 9,text;
     --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
@@ -63,6 +64,7 @@
     --key:#0550ae; --string:#953800; --comment:#59873a; --warn:#9a6700; --red:#cf222e;
     --shadow:0 8px 24px rgba(20,25,35,.08); --hover-overlay:rgba(0,0,0,.035);
     --chip-bg:rgba(26,127,55,.10);
+    --code-cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='18'%3E%3Crect width='2' height='18' fill='%231a7f37'/%3E%3C/svg%3E") 2 9,text;
   }
   html,body{transition:background-color .25s ease, color .25s ease}
   .term,.term-bar,nav.tabbar,#top-btn{transition:background-color .25s ease, border-color .25s ease, box-shadow .25s ease}
@@ -196,6 +198,11 @@
   .chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin:6px 0 14px}
   .chip{display:inline-block;padding:3px 10px;border-radius:20px;background:var(--chip-bg);border:1px solid var(--accent-dim);color:var(--accent);font-size:.78rem;line-height:1.4;transition:background .15s ease,transform .15s ease}
   .chip:hover{background:var(--accent-dim);color:var(--bg);transform:translateY(-1px)}
+
+  /* per-section cursor: prose reads like a text buffer, code/log sections show an editor-style block caret */
+  #summary .term-body,#achievements .term-body,#education .term-body{cursor:text}
+  #experience .term-body,#projects .term-body,#skills .term-body{cursor:var(--code-cursor)}
+  .term-body a,.term-body button,.term-body .copy-btn{cursor:pointer}
 
   .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
   .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
