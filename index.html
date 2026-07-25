@@ -5,13 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubh Saxena — Resume</title>
 <meta name="description" content="Shubh Saxena — Lead Engineer, distributed systems & high-scale architecture. Resume.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f7f8fb; --surface:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#0a5cd8; --accent2:#7c3aed;
     --line:#e3e3e8; --chip-bg:#f2f4f8; --shadow: 0 1px 3px rgba(20,20,30,.06);
+    --font-display:'Space Grotesk',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0e0f12; --surface:#181a1f; --fg:#e8e8ea; --muted:#a3a3ad; --accent:#6fa8ff; --accent2:#b794ff;
+    :root{ --bg:#0a0b0e; --surface:#181a1f; --fg:#e8e8ea; --muted:#a3a3ad; --accent:#6fa8ff; --accent2:#b794ff;
     --line:#2b2e35; --chip-bg:#1f232a; --shadow: 0 1px 3px rgba(0,0,0,.35); }
   }
   *{box-sizing:border-box}
@@ -19,16 +25,46 @@
   html,body{margin:0;padding:0}
   body{
     background:var(--bg); color:var(--fg);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.55; overflow-x:hidden;
+    font-family:var(--font-body);
+    line-height:1.6; overflow-x:hidden; position:relative;
+    letter-spacing:.1px;
   }
+  h1,h2,.role,.print-btn,.org{font-family:var(--font-display)}
+  .meta,.chip{font-family:var(--font-mono);letter-spacing:0}
+
+  /* whole-page aurora + dot-grid texture */
+  #aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg)}
+  #aurora::before{
+    content:'';position:absolute;inset:-20%;
+    background:
+      radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 40%),
+      radial-gradient(circle at 80% 30%, color-mix(in srgb, var(--accent2) 18%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 50% 80%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 50%);
+    animation:aurora 22s ease-in-out infinite alternate;
+    filter:blur(10px);
+  }
+  #aurora::after{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px);
+    background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 90%);
+            mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 90%);
+    opacity:.5;
+  }
+  @keyframes aurora{
+    0%{transform:translate(0,0) rotate(0deg) scale(1)}
+    50%{transform:translate(3%,-2%) rotate(8deg) scale(1.08)}
+    100%{transform:translate(-2%,3%) rotate(-6deg) scale(1.03)}
+  }
+  @media (prefers-reduced-motion: reduce){ #aurora::before{animation:none} }
 
   /* scroll progress bar */
   #progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:100;transition:width .1s linear}
 
   /* animated header backdrop */
   .hero{position:relative;overflow:hidden;border-radius:0 0 24px 24px;padding-bottom:2px}
-  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;z-index:0;animation:float 16s ease-in-out infinite}
+  .blob-layer{position:absolute;inset:0;transition:transform .3s ease-out;z-index:0}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;animation:float 16s ease-in-out infinite}
   .blob1{width:340px;height:340px;background:var(--accent);top:-140px;left:-100px;animation-delay:0s}
   .blob2{width:280px;height:280px;background:var(--accent2);top:-100px;right:-80px;animation-delay:-6s}
   @keyframes float{
@@ -42,9 +78,20 @@
   }
 
   .wrap{max-width:820px;margin:0 auto;padding:48px 24px 80px;position:relative;z-index:1}
-  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px;padding-bottom:24px;margin-bottom:8px}
-  h1{font-size:2.1rem;margin:0 0 4px;opacity:0;animation:riseIn .6s ease-out .1s forwards}
-  .title{font-size:1.05rem;color:var(--accent);font-weight:600;margin:0 0 12px;min-height:1.4em}
+  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px;padding:28px 28px 24px;margin-bottom:8px;
+    background:color-mix(in srgb, var(--surface) 65%, transparent);
+    backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow);
+  }
+  h1{
+    font-size:2.3rem;margin:0 0 4px;font-weight:700;opacity:0;animation:riseIn .6s ease-out .1s forwards;
+    background:linear-gradient(100deg,var(--fg),var(--accent) 45%,var(--accent2) 70%,var(--fg));
+    background-size:300% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:riseIn .6s ease-out .1s forwards, sheen 7s linear infinite 1s;
+  }
+  @keyframes sheen{to{background-position:300% center}}
+  @media (prefers-reduced-motion: reduce){ h1{animation:riseIn .6s ease-out .1s forwards} }
+  .title{font-size:1.05rem;color:var(--accent);font-weight:500;margin:0 0 12px;min-height:1.4em;font-family:var(--font-mono)}
   .cursor{display:inline-block;width:2px;background:var(--accent);margin-left:2px;animation:blink 1s step-end infinite}
   @keyframes blink{50%{opacity:0}}
   @keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -57,8 +104,9 @@
   .print-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(10,92,216,.3)}
 
   nav.pillnav{position:sticky;top:0;z-index:20;display:flex;gap:6px;flex-wrap:wrap;padding:10px 0;margin-bottom:28px;background:linear-gradient(var(--bg),var(--bg) 70%,transparent)}
-  nav.pillnav a{font-size:.82rem;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);transition:.15s ease}
-  nav.pillnav a:hover, nav.pillnav a.active{color:var(--accent);border-color:var(--accent)}
+  nav.pillnav a{position:relative;font-size:.82rem;font-family:var(--font-mono);color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);transition:.15s ease}
+  nav.pillnav a:hover{color:var(--accent);border-color:var(--accent)}
+  nav.pillnav a.active{color:#fff;border-color:transparent;background:linear-gradient(120deg,var(--accent),var(--accent2))}
 
   section{margin-bottom:36px;opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
   section.in{opacity:1;transform:translateY(0)}
@@ -82,7 +130,14 @@
   .skills-grid dt{font-weight:700;color:var(--muted)}
   .skills-grid dd{margin:0}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-  .chip{background:var(--chip-bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-size:0.85rem;transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease}
+  .chip{background:var(--chip-bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-size:0.8rem;transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+    opacity:0;transform:translateY(6px)}
+  section.in .chip{animation:chipIn .4s ease forwards}
+  section.in .chip:nth-child(1){animation-delay:.02s} section.in .chip:nth-child(2){animation-delay:.06s}
+  section.in .chip:nth-child(3){animation-delay:.10s} section.in .chip:nth-child(4){animation-delay:.14s}
+  section.in .chip:nth-child(5){animation-delay:.18s} section.in .chip:nth-child(6){animation-delay:.22s}
+  section.in .chip:nth-child(7){animation-delay:.26s}
+  @keyframes chipIn{to{opacity:1;transform:translateY(0)}}
   .chip:hover{transform:translateY(-3px) scale(1.05);border-color:var(--accent);color:var(--accent)}
 
   .achievements li{margin-bottom:8px}
@@ -94,20 +149,25 @@
   #top-btn:hover{transform:translateY(-3px)}
 
   @media print{
-    #progress,#top-btn,nav.pillnav,.print-btn,.blob{display:none}
+    #progress,#top-btn,nav.pillnav,.print-btn,.blob,#aurora{display:none}
     section{opacity:1 !important;transform:none !important}
-    ul.bullets li{opacity:1 !important;transform:none !important}
+    ul.bullets li,.chip{opacity:1 !important;transform:none !important}
+    h1{-webkit-text-fill-color:initial;background:none;color:var(--fg)}
+    header{backdrop-filter:none;background:none;border:none}
     .contacts a{border:none;padding:0;margin-right:12px}
     body{font-size:0.92rem}
   }
 </style>
 </head>
 <body>
+<div id="aurora"></div>
 <div id="progress"></div>
 
 <div class="hero">
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
+  <div class="blob-layer">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+  </div>
   <div class="wrap" style="padding-bottom:0">
     <header>
       <div>
@@ -292,6 +352,8 @@
 
 <script>
 (function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // scroll progress bar
   var progress = document.getElementById('progress');
   var topBtn = document.getElementById('top-btn');
@@ -304,8 +366,18 @@
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
+  // subtle mouse-parallax on hero blob layer
+  if (!reduce) {
+    var blobLayer = document.querySelector('.blob-layer');
+    document.querySelector('.hero').addEventListener('mousemove', function(e){
+      var r = this.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      blobLayer.style.transform = 'translate(' + (px * 24) + 'px,' + (py * 24) + 'px)';
+    });
+  }
+
   // typing effect (skips if reduced motion preferred)
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var phrases = [
     'Lead Engineer · Distributed Systems & High-Scale Architecture',
     'Building high-availability systems at 100M+ record scale',
