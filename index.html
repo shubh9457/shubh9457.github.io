@@ -180,6 +180,7 @@
   .proj-link:hover{color:var(--accent);border-color:var(--accent)}
 
   .md-bold{font-weight:700;color:var(--fg)}
+  .metric{font-weight:700;color:var(--accent)}
 
   .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
   .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
@@ -213,6 +214,7 @@
     .term-bar{background:#f3f3f3}
     section{opacity:1 !important;transform:none !important}
     .name,.commit-msg,.md-bold{color:#111}
+    .metric{color:#116329}
     .k{color:#0550ae}.s{color:#8b3d00}.c,.commit-meta,.term-title{color:#666}
     .diff li::before{color:#116329}
   }
@@ -265,7 +267,7 @@
 
 Lead Engineer with 6+ years building high-availability, distributed backend
 systems at scale — from blockchain-based financial settlement platforms to
-Go-based contact and search services handling <span class="md-bold">**100M+ records**</span>. Currently
+Go-based contact and search services handling <span class="metric">**100M+ records**</span>. Currently
 on the Contacts Platform team at GoHighLevel, improving system design and
 architecture at scale.
 
@@ -296,9 +298,9 @@ architecture at scale.
           <div class="commit-meta">Author: Shubh Saxena &lt;ssshubh97@gmail.com&gt;<br>Date:   Jul 2023 — Mar 2026 · Noida, India</div>
           <div class="commit-msg">Lead Backend Engineer / Distributed Systems Specialist — Brevo</div>
           <ul class="diff">
-            <li>Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain <strong>1,000+ RPS / 40k+ ops/min</strong> and supporting over <strong>100M+ contacts</strong>.</li>
-            <li>Drove a <strong>50% systemic reduction</strong> in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.</li>
-            <li>Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by <strong>over 30%</strong>.</li>
+            <li>Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain <strong class="metric">1,000+ RPS / 40k+ ops/min</strong> and supporting over <strong class="metric">100M+ contacts</strong>.</li>
+            <li>Drove a <strong class="metric">50% systemic reduction</strong> in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.</li>
+            <li>Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by <strong class="metric">over 30%</strong>.</li>
             <li>Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks.</li>
           </ul>
         </div>
@@ -308,9 +310,9 @@ architecture at scale.
           <div class="commit-meta">Author: Shubh Saxena &lt;ssshubh97@gmail.com&gt;<br>Date:   Aug 2019 — Jun 2023 · Noida, India</div>
           <div class="commit-msg">Software Engineer → Senior Software Engineer → Lead Engineer — DLT Labs</div>
           <ul class="diff">
-            <li>Served as Core Architect for an enterprise blockchain-based supply chain and financial settlement platform, scaling transaction processing from <strong>2k ops/min to 40k ops/min</strong> through advanced Node.js runtime and garbage collection tuning.</li>
+            <li>Served as Core Architect for an enterprise blockchain-based supply chain and financial settlement platform, scaling transaction processing from <strong class="metric">2k ops/min to 40k ops/min</strong> through advanced Node.js runtime and garbage collection tuning.</li>
             <li>Designed a high-performance data replication engine that synthesized multi-source distributed data streams in real-time, drastically reducing cross-system sync lag and unlocking advanced dynamic CRM segmentation.</li>
-            <li>Spearheaded production engineering strategy for mission-critical distributed systems, building automated self-healing workflows and debugging frameworks that preserved <strong>99.99% availability SLAs</strong>.</li>
+            <li>Spearheaded production engineering strategy for mission-critical distributed systems, building automated self-healing workflows and debugging frameworks that preserved <strong class="metric">99.99% availability SLAs</strong>.</li>
             <li>Recognized across 3 elite corporate categories ('Top Achiever', 'Best Improvement', 'Most Efficient Developer') for pioneering technical initiatives that slashed operational infrastructure overhead.</li>
           </ul>
         </div>
@@ -328,13 +330,13 @@ architecture at scale.
     <span class="k">"name"</span>: <span class="s">"Segmentation — CRM"</span>,
     <span class="k">"status"</span>: <span class="s">"ongoing"</span>,
     <span class="k">"stack"</span>: [<span class="s">"ClickHouse"</span>, <span class="s">"PostgreSQL"</span>, <span class="s">"Redis"</span>, <span class="s">"MongoDB"</span>],
-    <span class="k">"desc"</span>: <span class="s">"Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability."</span>
+    <span class="k">"desc"</span>: <span class="s">"Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at <span class="metric">100M+ contact</span> scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability."</span>
   },
   {
     <span class="k">"name"</span>: <span class="s">"<a class="proj-link" href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noreferrer">high-scale-search<span class="sr-only"> (opens in new tab)</span></a>"</span>,
     <span class="k">"status"</span>: <span class="s">"personal project"</span>,
     <span class="k">"stack"</span>: [<span class="s">"Go"</span>, <span class="s">"Elasticsearch"</span>, <span class="s">"ClickHouse"</span>, <span class="s">"Firestore"</span>, <span class="s">"Redis"</span>, <span class="s">"Kafka"</span>],
-    <span class="k">"desc"</span>: <span class="s">"Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores."</span>
+    <span class="k">"desc"</span>: <span class="s">"Production-grade Go search orchestration service designed for <span class="metric">10B+ records</span> at <span class="metric">sub-200ms p99</span> latency — unifies a fault-tolerant search pipeline across five datastores."</span>
   },
   {
     <span class="k">"name"</span>: <span class="s">"Plant Disease Classification by Leaf Image"</span>,
@@ -376,7 +378,7 @@ architecture at scale.
       <div class="term-body">
 <pre class="code" id="achievements-body"><span class="k">- [x]</span> <span class="md-bold">**Letter of Appreciation**</span> — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.
 
-<span class="k">- [x]</span> <span class="md-bold">**Problem Solving**</span> — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.
+<span class="k">- [x]</span> <span class="md-bold">**Problem Solving**</span> — solved <span class="metric">1,000+ problems</span> on LeetCode; active in the Educative.io developer community.
 
 <span class="k">- [x]</span> <span class="md-bold">**Company Recognitions**</span> — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.
 
@@ -389,7 +391,7 @@ architecture at scale.
     <div class="term">
       <div class="term-bar"><span class="term-title">~/resume/education.txt</span><button class="copy-btn" type="button" data-copy="education-body">⧉ copy</button></div>
       <div class="term-body">
-<pre class="code" id="education-body"><span class="md-bold">B.Tech, Computer Science &amp; Engineering</span> — 84.6%
+<pre class="code" id="education-body"><span class="md-bold">B.Tech, Computer Science &amp; Engineering</span> — <span class="metric">84.6%</span>
 APJ Abdul Kalam Technical University · 2016 – 2019</pre>
       </div>
     </div>
