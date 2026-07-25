@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://shubh9457.github.io/og-image.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,6 +53,8 @@
     --fg:#d8dee9; --muted:#6b7686; --accent:#7ee787; --accent-dim:#4c9a5c;
     --key:#9cdcfe; --string:#ce9178; --comment:#6a9955; --warn:#ffcb6b; --red:#ff6161;
     --shadow:0 8px 24px rgba(0,0,0,.35); --hover-overlay:rgba(255,255,255,.03);
+    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
   :root[data-theme="light"]{
     --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
@@ -68,7 +70,7 @@
   html,body{margin:0;padding:0}
   body{
     background:var(--bg); color:var(--fg);
-    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-family:var(--font-mono);
     font-size:14.5px; line-height:1.7; overflow-x:hidden; position:relative;
   }
 
@@ -127,8 +129,8 @@
 
   .prompt{color:var(--accent)}
   .prompt::before{content:'$ ';color:var(--muted)}
-  .name{font-size:1.5rem;font-weight:700;color:var(--fg);margin:2px 0 2px}
-  #boot{white-space:pre-wrap;min-height:7.6em}
+  .name{font-family:var(--font-sans);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--fg);margin:2px 0 2px}
+  #boot{white-space:pre-wrap;min-height:5.2em}
   #boot .comment{color:var(--comment)}
   #boot .out{color:var(--fg)}
   #boot .warn{color:var(--warn)}
@@ -168,9 +170,9 @@
   .commit:first-child{padding-top:0}
   .commit-line1{color:var(--warn)}
   .commit-meta{color:var(--muted);font-size:.85rem}
-  .commit-msg{color:var(--fg);font-weight:700;margin:8px 0 10px}
+  .commit-msg{font-family:var(--font-sans);color:var(--fg);font-weight:700;font-size:1.05rem;margin:8px 0 10px}
   .diff{margin:0;padding-left:18px}
-  .diff li{list-style:none;position:relative;padding-left:6px;margin-bottom:6px;color:var(--fg)}
+  .diff li{font-family:var(--font-sans);font-size:.92rem;line-height:1.6;list-style:none;position:relative;padding-left:6px;margin-bottom:6px;color:var(--fg)}
   .diff li::before{content:'+';color:var(--accent);position:absolute;left:-14px}
 
   /* json/yaml styling */
@@ -185,9 +187,6 @@
   .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
   .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
   .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
-
-  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
-  footer a{color:var(--accent);text-decoration:none}
 
   #top-btn{position:fixed;right:18px;bottom:18px;width:38px;height:38px;border-radius:6px;background:var(--panel);border:1px solid var(--border);color:var(--fg);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:50;font-family:inherit}
   #top-btn.show{opacity:1;pointer-events:auto}
@@ -236,6 +235,7 @@
       </button>
     </div>
     <div class="term-body">
+      <h1 class="name">Shubh Saxena</h1>
       <div id="boot"></div>
       <div class="contacts">
         <a href="mailto:ssshubh97@gmail.com">email</a>
@@ -397,10 +397,6 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     </div>
   </section>
 
-  <footer>
-    <p><span class="prompt">echo</span> "also see my <a href="https://github.com/shubh9457" target="_blank" rel="noreferrer">GitHub profile<span class="sr-only"> (opens in new tab)</span></a>" · built on GitHub Pages</p>
-  </footer>
-
 </div>
 
 <button id="top-btn" title="Back to top" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
@@ -470,9 +466,6 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
 
   // one-time boot sequence in the header terminal
   var bootLines = [
-    {t:'comment', text:'$ whoami'},
-    {t:'out', text:'Shubh Saxena'},
-    {t:'blank'},
     {t:'comment', text:'$ cat role.txt'},
     {t:'out', text:'Lead Engineer — Distributed Systems & High-Scale Architecture @ GoHighLevel'},
     {t:'blank'},
