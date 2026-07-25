@@ -177,9 +177,11 @@
   .proj-link{color:var(--key);text-decoration:none;border-bottom:1px dotted var(--key)}
   .proj-link:hover{color:var(--accent);border-color:var(--accent)}
 
-  .checklist{list-style:none;margin:0;padding:0}
-  .checklist li{margin-bottom:8px;padding-left:36px;position:relative}
-  .checklist li::before{content:'[x]';position:absolute;left:0;top:0;color:var(--accent);white-space:nowrap}
+  .md-bold{font-weight:700;color:var(--fg)}
+
+  .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
+  .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
+  .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
 
   footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
   footer a{color:var(--accent);text-decoration:none}
@@ -198,16 +200,17 @@
     .term-body{padding:18px 16px}
     .print-btn{position:static;margin-top:10px;margin-right:8px;display:inline-block}
     .theme-toggle{position:static;margin-top:10px;vertical-align:middle}
-    header .term-bar{flex-wrap:wrap}
+    header .term-bar,.term-bar{flex-wrap:wrap}
+    .copy-btn{margin-left:0}
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor{display:none}
+    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff}
     .term-bar{background:#f3f3f3}
     section{opacity:1 !important;transform:none !important}
-    .name,.commit-msg{color:#111}
+    .name,.commit-msg,.md-bold{color:#111}
     .k{color:#0550ae}.s{color:#8b3d00}.c,.commit-meta,.term-title{color:#666}
     .diff li::before{color:#116329}
   }
@@ -254,21 +257,25 @@
 
   <section id="summary">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/readme.md</span></div>
+      <div class="term-bar"><span class="term-title">~/resume/readme.md</span><button class="copy-btn" type="button" data-copy="summary-body">⧉ copy</button></div>
       <div class="term-body">
-        <p>Lead Engineer with 6+ years building high-availability, distributed backend systems at scale —
-        from blockchain-based financial settlement platforms to Go-based contact and search services
-        handling <strong>100M+ records</strong>. Currently on the Contacts Platform team at GoHighLevel,
-        improving system design and architecture at scale.</p>
-        <p><span class="warn">status:</span> open to <strong>Staff / Principal Engineer</strong> opportunities.</p>
+<pre class="code" id="summary-body"><span class="k"># Summary</span>
+
+Lead Engineer with 6+ years building high-availability, distributed backend
+systems at scale — from blockchain-based financial settlement platforms to
+Go-based contact and search services handling <span class="md-bold">**100M+ records**</span>. Currently
+on the Contacts Platform team at GoHighLevel, improving system design and
+architecture at scale.
+
+<span class="c">&gt;</span> <span class="md-bold">**status:**</span> open to <span class="md-bold">**Staff / Principal Engineer**</span> opportunities.</pre>
       </div>
     </div>
   </section>
 
   <section id="experience">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/experience.log</span></div>
-      <div class="term-body">
+      <div class="term-bar"><span class="term-title">~/resume/experience.log</span><button class="copy-btn" type="button" data-copy="experience-body">⧉ copy</button></div>
+      <div class="term-body" id="experience-body">
 
         <div class="commit">
           <div class="commit-line1">commit gohighlevel--lead-engineer</div>
@@ -312,9 +319,9 @@
 
   <section id="projects">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/projects.json</span></div>
+      <div class="term-bar"><span class="term-title">~/resume/projects.json</span><button class="copy-btn" type="button" data-copy="projects-body">⧉ copy</button></div>
       <div class="term-body">
-<pre class="code">[
+<pre class="code" id="projects-body">[
   {
     <span class="k">"name"</span>: <span class="s">"Segmentation — CRM"</span>,
     <span class="k">"status"</span>: <span class="s">"ongoing"</span>,
@@ -340,9 +347,9 @@
 
   <section id="skills">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/skills.yaml</span></div>
+      <div class="term-bar"><span class="term-title">~/resume/skills.yaml</span><button class="copy-btn" type="button" data-copy="skills-body">⧉ copy</button></div>
       <div class="term-body">
-<pre class="code"><span class="k">architecture:</span>
+<pre class="code" id="skills-body"><span class="k">architecture:</span>
   <span class="c"># patterns I design and operate at scale</span>
   - <span class="s">High-Throughput System Design</span>
   - <span class="s">Microservices</span>
@@ -363,24 +370,25 @@
 
   <section id="achievements">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/achievements.md</span></div>
+      <div class="term-bar"><span class="term-title">~/resume/achievements.md</span><button class="copy-btn" type="button" data-copy="achievements-body">⧉ copy</button></div>
       <div class="term-body">
-        <ul class="checklist">
-          <li><strong>Letter of Appreciation</strong> — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.</li>
-          <li><strong>Problem Solving</strong> — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.</li>
-          <li><strong>Company Recognitions</strong> — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.</li>
-          <li><strong>Winner — AKTU State-Level Football Championship</strong> — champions of AKTU Zonal and State-Level Football Championships (2018–2019).</li>
-        </ul>
+<pre class="code" id="achievements-body"><span class="k">- [x]</span> <span class="md-bold">**Letter of Appreciation**</span> — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.
+
+<span class="k">- [x]</span> <span class="md-bold">**Problem Solving**</span> — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.
+
+<span class="k">- [x]</span> <span class="md-bold">**Company Recognitions**</span> — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.
+
+<span class="k">- [x]</span> <span class="md-bold">**Winner — AKTU State-Level Football Championship**</span> — champions of AKTU Zonal and State-Level Football Championships (2018–2019).</pre>
       </div>
     </div>
   </section>
 
   <section id="education">
     <div class="term">
-      <div class="term-bar"><span class="term-title">~/resume/education.txt</span></div>
+      <div class="term-bar"><span class="term-title">~/resume/education.txt</span><button class="copy-btn" type="button" data-copy="education-body">⧉ copy</button></div>
       <div class="term-body">
-        <p><strong>B.Tech, Computer Science &amp; Engineering</strong> — 84.6%<br>
-        APJ Abdul Kalam Technical University · 2016 – 2019</p>
+<pre class="code" id="education-body"><span class="md-bold">B.Tech, Computer Science &amp; Engineering</span> — 84.6%
+APJ Abdul Kalam Technical University · 2016 – 2019</pre>
       </div>
     </div>
   </section>
@@ -424,6 +432,23 @@
       syncToggle();
     }
     try{ localStorage.setItem('theme', next); }catch(e){}
+  });
+
+  // copy-to-clipboard on each source block
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    var original = btn.textContent;
+    btn.addEventListener('click', function(){
+      var target = document.getElementById(btn.getAttribute('data-copy'));
+      if (!target || !navigator.clipboard) return;
+      navigator.clipboard.writeText(target.innerText).then(function(){
+        btn.textContent = '✓ copied';
+        btn.classList.add('copied');
+        setTimeout(function(){
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1400);
+      });
+    });
   });
 
   // scroll progress + back-to-top
