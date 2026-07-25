@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>404 — Shubh Saxena</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0e12'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' fill='%237ee787' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0e12;color:#d8dee9;font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:20px}
+  .term{width:100%;max-width:560px;background:#10151b;border:1px solid #232a33;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#161c24;border-bottom:1px solid #232a33}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .dot.r{background:#ff5f56} .dot.y{background:#ffbd2e} .dot.g{background:#27c93f}
+  .term-title{margin-left:8px;color:#6b7686;font-size:.78rem}
+  .term-body{padding:24px 26px;font-size:.92rem;line-height:1.7}
+  .prompt{color:#6a9955}
+  .err{color:#ff6161}
+  a{color:#7ee787;text-decoration:none;border-bottom:1px solid #4c9a5c}
+  a:hover{color:#fff}
+  .cursor{display:inline-block;width:8px;height:1em;background:#7ee787;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
+</style>
+</head>
+<body>
+  <div class="term">
+    <div class="term-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="term-title">shubh@resume — zsh</span>
+    </div>
+    <div class="term-body">
+      <div><span class="prompt">$</span> cd ./requested-page</div>
+      <div class="err">zsh: no such file or directory</div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">$</span> cd ~ &amp;&amp; ls</div>
+      <div>Nothing here — but the <a href="/">resume</a> is one directory up.<span class="cursor"></span></div>
+    </div>
+  </div>
+</body>
+</html>
