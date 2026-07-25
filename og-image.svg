@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0e12"/>
+  <rect x="40" y="40" width="1120" height="550" rx="14" fill="#10151b" stroke="#232a33" stroke-width="2"/>
+  <rect x="40" y="40" width="1120" height="56" rx="14" fill="#161c24"/>
+  <rect x="40" y="82" width="1120" height="14" fill="#161c24"/>
+  <circle cx="76" cy="68" r="8" fill="#ff6161"/>
+  <circle cx="102" cy="68" r="8" fill="#ffcb6b"/>
+  <circle cx="128" cy="68" r="8" fill="#7ee787"/>
+  <text x="600" y="74" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="18" fill="#6b7686" text-anchor="middle">resume.sh — shubh9457.github.io</text>
+
+  <text x="90" y="220" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="26" fill="#4c9a5c">$ whoami</text>
+  <text x="90" y="290" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="52" font-weight="700" fill="#d8dee9">Shubh Saxena</text>
+  <text x="90" y="340" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="26" fill="#9cdcfe">Lead Engineer — Distributed Systems @ Scale</text>
+
+  <text x="90" y="410" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="20" fill="#6b7686"># 6+ yrs · Go · Node.js · Python · 100M+ record scale</text>
+
+  <text x="90" y="470" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="20" fill="#ce9178">status:</text>
+  <text x="200" y="470" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="20" fill="#7ee787">open to Staff / Principal Engineer roles</text>
+
+  <text x="90" y="540" font-family="JetBrains Mono, ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#4c9a5c">$ <tspan fill="#d8dee9">_</tspan></text>
+</svg>
