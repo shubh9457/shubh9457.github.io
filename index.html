@@ -101,7 +101,7 @@
   #boot .comment{color:var(--comment)}
   #boot .out{color:var(--fg)}
   #boot .warn{color:var(--warn)}
-  .cursor{display:inline-block;width:8px;height:1.1em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+  .cursor{display:inline-block;width:8px;height:1.1em;background:var(--accent);vertical-align:text-bottom;margin-left:4px;animation:blink 1s step-end infinite}
   @keyframes blink{50%{opacity:0}}
   @media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
 
@@ -111,12 +111,16 @@
   .contacts a::before{content:'./';color:var(--muted)}
 
   /* tab bar nav, VSCode-style */
-  nav.tabbar{position:sticky;top:0;z-index:20;display:flex;overflow-x:auto;background:var(--panel-head);border:1px solid var(--border);border-radius:8px 8px 0 0;scrollbar-width:none}
+  .tabbar-wrap{position:sticky;top:0;z-index:20;border-radius:8px 8px 0 0}
+  nav.tabbar{display:flex;overflow-x:auto;background:var(--panel-head);border:1px solid var(--border);border-radius:8px 8px 0 0;scrollbar-width:none}
   nav.tabbar::-webkit-scrollbar{display:none}
   nav.tabbar a{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.78rem;color:var(--muted);text-decoration:none;border-right:1px solid var(--border);border-top:2px solid transparent;background:transparent;transition:.15s ease}
   nav.tabbar a .ext{color:var(--comment)}
   nav.tabbar a:hover{color:var(--fg);background:rgba(255,255,255,.03)}
   nav.tabbar a.active{color:var(--fg);background:var(--panel);border-top-color:var(--accent)}
+  .tabbar-wrap::before,.tabbar-wrap::after{content:'';position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;z-index:1}
+  .tabbar-wrap::before{left:1px;background:linear-gradient(90deg, var(--panel-head), transparent);border-radius:8px 0 0 0}
+  .tabbar-wrap::after{right:1px;background:linear-gradient(270deg, var(--panel-head), transparent);border-radius:0 8px 0 0}
   .tabbar-spacer{height:1px}
 
   section{margin-bottom:0;opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease}
@@ -203,14 +207,16 @@
     </div>
   </header>
 
-  <nav class="tabbar">
-    <a href="#summary">readme<span class="ext">.md</span></a>
-    <a href="#experience">experience<span class="ext">.log</span></a>
-    <a href="#projects">projects<span class="ext">.json</span></a>
-    <a href="#skills">skills<span class="ext">.yaml</span></a>
-    <a href="#achievements">achievements<span class="ext">.md</span></a>
-    <a href="#education">education<span class="ext">.txt</span></a>
-  </nav>
+  <div class="tabbar-wrap">
+    <nav class="tabbar">
+      <a href="#summary">readme<span class="ext">.md</span></a>
+      <a href="#experience">experience<span class="ext">.log</span></a>
+      <a href="#projects">projects<span class="ext">.json</span></a>
+      <a href="#skills">skills<span class="ext">.yaml</span></a>
+      <a href="#achievements">achievements<span class="ext">.md</span></a>
+      <a href="#education">education<span class="ext">.txt</span></a>
+    </nav>
+  </div>
   <div class="tabbar-spacer"></div>
 
   <section id="summary">
