@@ -51,13 +51,13 @@
     --bg:#0a0e12; --panel:#10151b; --panel-head:#161c24; --border:#232a33;
     --fg:#d8dee9; --muted:#6b7686; --accent:#7ee787; --accent-dim:#4c9a5c;
     --key:#9cdcfe; --string:#ce9178; --comment:#6a9955; --warn:#ffcb6b; --red:#ff6161;
-    --shadow:0 8px 24px rgba(0,0,0,.35);
+    --shadow:0 8px 24px rgba(0,0,0,.35); --hover-overlay:rgba(255,255,255,.03);
   }
   :root[data-theme="light"]{
     --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
     --fg:#20262e; --muted:#5c6572; --accent:#1a7f37; --accent-dim:#116329;
     --key:#0550ae; --string:#953800; --comment:#59873a; --warn:#9a6700; --red:#cf222e;
-    --shadow:0 8px 24px rgba(20,25,35,.08);
+    --shadow:0 8px 24px rgba(20,25,35,.08); --hover-overlay:rgba(0,0,0,.035);
   }
   html,body{transition:background-color .25s ease, color .25s ease}
   .term,.term-bar,nav.tabbar,#top-btn{transition:background-color .25s ease, border-color .25s ease, box-shadow .25s ease}
@@ -112,7 +112,7 @@
 
   header.term{position:relative}
   .print-btn{position:absolute;top:9px;right:80px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
-  .print-btn:hover{background:var(--accent);color:#08130a}
+  .print-btn:hover{background:var(--accent);color:var(--bg)}
 
   .theme-toggle{position:absolute;top:8px;right:14px;width:52px;height:24px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer;padding:0;display:flex;align-items:center;transition:background-color .3s ease,border-color .3s ease}
   .theme-toggle .thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);margin-left:2px;display:flex;align-items:center;justify-content:center;font-size:11px;transform:translateX(0);transition:transform .3s cubic-bezier(.4,0,.2,1),background-color .3s ease;line-height:1}
@@ -145,14 +145,14 @@
   nav.tabbar::-webkit-scrollbar{display:none}
   nav.tabbar a{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.78rem;color:var(--muted);text-decoration:none;border-right:1px solid var(--border);border-top:2px solid transparent;background:transparent;transition:.15s ease}
   nav.tabbar a .ext{color:var(--comment)}
-  nav.tabbar a:hover{color:var(--fg);background:rgba(255,255,255,.03)}
+  nav.tabbar a:hover{color:var(--fg);background:var(--hover-overlay)}
   nav.tabbar a.active{color:var(--fg);background:var(--panel);border-top-color:var(--accent)}
   .tabbar-wrap::before,.tabbar-wrap::after{content:'';position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;z-index:1}
   .tabbar-wrap::before{left:1px;background:linear-gradient(90deg, var(--panel-head), transparent);border-radius:8px 0 0 0}
   .tabbar-wrap::after{right:1px;background:linear-gradient(270deg, var(--panel-head), transparent);border-radius:0 8px 0 0}
   .tabbar-spacer{height:1px}
 
-  section{margin-bottom:0;opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease}
+  section{margin-bottom:0;opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease;scroll-margin-top:52px}
   section.in{opacity:1;transform:translateY(0)}
   section .term{border-radius:0 0 8px 8px;border-top:none;margin-top:0;margin-bottom:26px}
   section:first-of-type .term{border-radius:8px}
@@ -188,7 +188,11 @@
   #top-btn.show{opacity:1;pointer-events:auto}
   #top-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
 
-  ::selection{background:var(--accent-dim);color:#0a0e12}
+  ::selection{background:var(--accent-dim);color:var(--bg)}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 
   @media (max-width:560px){
     .term-body{padding:18px 16px}
@@ -228,10 +232,10 @@
       <div id="boot"></div>
       <div class="contacts">
         <a href="mailto:ssshubh97@gmail.com">email</a>
-        <a href="https://www.linkedin.com/in/shubh-saxena/" target="_blank" rel="noreferrer">linkedin</a>
-        <a href="https://github.com/shubh9457" target="_blank" rel="noreferrer">github</a>
-        <a href="https://medium.com/@shubhsaxena" target="_blank" rel="noreferrer">medium</a>
-        <a href="https://leetcode.com/shubhsaxena/" target="_blank" rel="noreferrer">leetcode</a>
+        <a href="https://www.linkedin.com/in/shubh-saxena/" target="_blank" rel="noreferrer">linkedin<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://github.com/shubh9457" target="_blank" rel="noreferrer">github<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://medium.com/@shubhsaxena" target="_blank" rel="noreferrer">medium<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://leetcode.com/shubhsaxena/" target="_blank" rel="noreferrer">leetcode<span class="sr-only"> (opens in new tab)</span></a>
       </div>
     </div>
   </header>
@@ -318,7 +322,7 @@
     <span class="k">"desc"</span>: <span class="s">"Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability."</span>
   },
   {
-    <span class="k">"name"</span>: <span class="s">"<a class="proj-link" href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noreferrer">high-scale-search</a>"</span>,
+    <span class="k">"name"</span>: <span class="s">"<a class="proj-link" href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noreferrer">high-scale-search<span class="sr-only"> (opens in new tab)</span></a>"</span>,
     <span class="k">"status"</span>: <span class="s">"personal project"</span>,
     <span class="k">"stack"</span>: [<span class="s">"Go"</span>, <span class="s">"Elasticsearch"</span>, <span class="s">"ClickHouse"</span>, <span class="s">"Firestore"</span>, <span class="s">"Redis"</span>, <span class="s">"Kafka"</span>],
     <span class="k">"desc"</span>: <span class="s">"Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores."</span>
