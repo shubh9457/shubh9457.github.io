@@ -231,11 +231,34 @@
   #experience .term-body,#projects .term-body,#skills .term-body{cursor:var(--code-cursor)}
   .term-body a,.term-body button,.term-body .copy-btn{cursor:pointer}
 
+  /* VS Code-style status bar */
+  .statusbar{position:fixed;left:0;right:0;bottom:0;height:26px;display:flex;align-items:center;justify-content:space-between;background:var(--accent-dim);color:var(--bg);font-size:.72rem;padding:0 12px;z-index:40;font-family:var(--font-mono)}
+  .sb-left,.sb-right{display:flex;align-items:center;gap:14px;min-width:0}
+  .sb-item{white-space:nowrap}
+  .sb-section{overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+  .sb-cmdk{background:transparent;border:none;color:var(--bg);font:inherit;cursor:pointer;padding:0}
+  .sb-cmdk:hover{text-decoration:underline}
+  @media (max-width:560px){ .statusbar{font-size:.66rem;padding:0 8px} .sb-item:not(.sb-section):not(.sb-cmdk){display:none} }
+
+  /* command palette */
+  .cmdk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;padding-top:12vh;z-index:200}
+  .cmdk-overlay[hidden]{display:none}
+  .cmdk{width:calc(100% - 32px);max-width:520px;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden;font-family:var(--font-mono)}
+  .cmdk-input-row{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border)}
+  .cmdk-prompt{color:var(--accent);font-weight:700}
+  .cmdk-input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font:inherit;font-size:.95rem;min-width:0}
+  .cmdk-esc{color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:.7rem}
+  .cmdk-list{list-style:none;margin:0;padding:6px;max-height:320px;overflow-y:auto}
+  .cmdk-list li{padding:9px 12px;border-radius:6px;color:var(--fg);font-size:.85rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .cmdk-list li .cmdk-hint{color:var(--muted);font-size:.75rem;white-space:nowrap}
+  .cmdk-list li.active{background:var(--hover-overlay);color:var(--accent)}
+  .cmdk-empty{padding:14px 16px;color:var(--muted);font-size:.85rem}
+
   .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
   .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
   .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
 
-  #top-btn{position:fixed;right:18px;bottom:18px;width:38px;height:38px;border-radius:6px;background:var(--panel);border:1px solid var(--border);color:var(--fg);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:50;font-family:inherit}
+  #top-btn{position:fixed;right:18px;bottom:52px;width:38px;height:38px;border-radius:6px;background:var(--panel);border:1px solid var(--border);color:var(--fg);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:50;font-family:inherit}
   #top-btn.show{opacity:1;pointer-events:auto}
   #top-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
 
@@ -256,7 +279,7 @@
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint{display:none}
+    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff;transform:none !important}
     .term::before{display:none}
@@ -462,6 +485,29 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
 
 <button id="top-btn" title="Back to top" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
 
+<div class="statusbar" role="status" aria-label="Site status bar">
+  <div class="sb-left">
+    <span class="sb-item">⎇ main</span>
+    <span class="sb-item sb-section" id="sb-section">readme.md</span>
+  </div>
+  <div class="sb-right">
+    <span class="sb-item">UTF-8</span>
+    <span class="sb-item">LF</span>
+    <button class="sb-item sb-cmdk" type="button" id="sb-cmdk-btn">⌘K commands</button>
+  </div>
+</div>
+
+<div class="cmdk-overlay" id="cmdk-overlay" hidden>
+  <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-input-row">
+      <span class="cmdk-prompt" aria-hidden="true">›</span>
+      <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Type a command or section…" autocomplete="off" spellcheck="false" aria-label="Command palette input">
+      <kbd class="cmdk-esc">esc</kbd>
+    </div>
+    <ul class="cmdk-list" id="cmdk-list"></ul>
+  </div>
+</div>
+
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -600,7 +646,11 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
         var link = document.querySelector('nav.tabbar a[href="#' + id + '"]');
         if (link) {
           link.classList.toggle('active', entry.isIntersecting);
-          if (entry.isIntersecting) { link.setAttribute('aria-current', 'page'); }
+          if (entry.isIntersecting) {
+            link.setAttribute('aria-current', 'page');
+            var sbSection = document.getElementById('sb-section');
+            if (sbSection) sbSection.textContent = link.textContent;
+          }
           else { link.removeAttribute('aria-current'); }
         }
       });
@@ -620,6 +670,126 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     var target = document.getElementById(links[nextIdx].getAttribute('href').slice(1));
     if (target) target.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
   });
+
+  // command palette
+  var cmdkOverlay = document.getElementById('cmdk-overlay');
+  var cmdkInput = document.getElementById('cmdk-input');
+  var cmdkList = document.getElementById('cmdk-list');
+  var cmdkLastFocused = null;
+
+  function scrollToId(id){
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+  }
+
+  var commands = [
+    {label: 'Go to readme.md — Summary', run: function(){ scrollToId('summary'); }},
+    {label: 'Go to experience.log — Experience', run: function(){ scrollToId('experience'); }},
+    {label: 'Go to projects.json — Projects', run: function(){ scrollToId('projects'); }},
+    {label: 'Go to skills.yaml — Skills', run: function(){ scrollToId('skills'); }},
+    {label: 'Go to achievements.md — Achievements', run: function(){ scrollToId('achievements'); }},
+    {label: 'Go to education.txt — Education', run: function(){ scrollToId('education'); }},
+    {label: 'Toggle theme', hint: 'dark/light', run: function(){ var t = document.getElementById('theme-toggle'); if (t) t.click(); }},
+    {label: 'Copy email address', hint: 'ssshubh97@gmail.com', run: function(){ navigator.clipboard && navigator.clipboard.writeText('ssshubh97@gmail.com'); }},
+    {label: 'Open LinkedIn', hint: '↗ opens new tab', run: function(){ window.open('https://www.linkedin.com/in/shubh-saxena/', '_blank', 'noopener'); }},
+    {label: 'Open GitHub', hint: '↗ opens new tab', run: function(){ window.open('https://github.com/shubh9457', '_blank', 'noopener'); }},
+    {label: 'Open Medium', hint: '↗ opens new tab', run: function(){ window.open('https://medium.com/@shubhsaxena', '_blank', 'noopener'); }},
+    {label: 'Open LeetCode', hint: '↗ opens new tab', run: function(){ window.open('https://leetcode.com/shubhsaxena/', '_blank', 'noopener'); }},
+    {label: 'Print / save as PDF', hint: '⌘P', run: function(){ window.print(); }},
+    {label: 'Scroll to top', run: function(){ window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}); }}
+  ];
+
+  function cmdkFiltered(){
+    var q = cmdkInput.value.trim().toLowerCase();
+    if (!q) return commands;
+    return commands.filter(function(c){ return c.label.toLowerCase().indexOf(q) !== -1; });
+  }
+
+  function cmdkRender(){
+    var matches = cmdkFiltered();
+    cmdkList.innerHTML = '';
+    if (!matches.length){
+      var empty = document.createElement('div');
+      empty.className = 'cmdk-empty';
+      empty.textContent = 'No matching commands';
+      cmdkList.appendChild(empty);
+      return;
+    }
+    matches.forEach(function(c, i){
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      if (i === 0) li.classList.add('active');
+      var label = document.createElement('span');
+      label.textContent = c.label;
+      li.appendChild(label);
+      if (c.hint){
+        var hint = document.createElement('span');
+        hint.className = 'cmdk-hint';
+        hint.textContent = c.hint;
+        li.appendChild(hint);
+      }
+      li.addEventListener('click', function(){ cmdkRun(c); });
+      cmdkList.appendChild(li);
+    });
+  }
+
+  function cmdkRun(c){
+    cmdkClose();
+    c.run();
+  }
+
+  function cmdkOpen(){
+    cmdkLastFocused = document.activeElement;
+    cmdkOverlay.hidden = false;
+    cmdkInput.value = '';
+    cmdkRender();
+    cmdkInput.focus();
+  }
+
+  function cmdkClose(){
+    cmdkOverlay.hidden = true;
+    if (cmdkLastFocused && cmdkLastFocused.focus) cmdkLastFocused.focus();
+  }
+
+  cmdkInput.addEventListener('input', cmdkRender);
+
+  cmdkInput.addEventListener('keydown', function(e){
+    var items = cmdkList.querySelectorAll('li');
+    if (e.key === 'Escape'){ e.preventDefault(); cmdkClose(); return; }
+    if (!items.length) return;
+    var activeIdx = -1;
+    items.forEach(function(li, i){ if (li.classList.contains('active')) activeIdx = i; });
+    if (e.key === 'ArrowDown'){
+      e.preventDefault();
+      if (items[activeIdx]) items[activeIdx].classList.remove('active');
+      var next = items[Math.min(activeIdx + 1, items.length - 1)];
+      next.classList.add('active');
+      next.scrollIntoView({block: 'nearest'});
+    } else if (e.key === 'ArrowUp'){
+      e.preventDefault();
+      if (items[activeIdx]) items[activeIdx].classList.remove('active');
+      var prev = items[Math.max(activeIdx - 1, 0)];
+      prev.classList.add('active');
+      prev.scrollIntoView({block: 'nearest'});
+    } else if (e.key === 'Enter'){
+      e.preventDefault();
+      var matches = cmdkFiltered();
+      var idx = activeIdx === -1 ? 0 : activeIdx;
+      if (matches[idx]) cmdkRun(matches[idx]);
+    }
+  });
+
+  cmdkOverlay.addEventListener('click', function(e){ if (e.target === cmdkOverlay) cmdkClose(); });
+
+  document.addEventListener('keydown', function(e){
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')){
+      e.preventDefault();
+      if (cmdkOverlay.hidden) cmdkOpen(); else cmdkClose();
+    }
+  });
+
+  var sbCmdkBtn = document.getElementById('sb-cmdk-btn');
+  if (sbCmdkBtn) sbCmdkBtn.addEventListener('click', cmdkOpen);
 })();
 </script>
 
