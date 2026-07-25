@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubh Saxena — Resume</title>
+<meta name="description" content="Shubh Saxena — Lead Engineer, distributed systems & high-scale architecture. Resume.">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5a5a5a; --accent:#0a5cd8; --line:#e3e3e8; --chip-bg:#f2f4f8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#14161a; --fg:#e8e8ea; --muted:#a3a3ad; --accent:#6fa8ff; --line:#2b2e35; --chip-bg:#1f232a; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:48px 24px 80px}
+  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid var(--line);padding-bottom:24px;margin-bottom:32px}
+  h1{font-size:2rem;margin:0 0 4px}
+  .title{font-size:1.05rem;color:var(--accent);font-weight:600;margin:0 0 12px}
+  .contacts{display:flex;flex-wrap:wrap;gap:10px;font-size:0.9rem}
+  .contacts a{color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:4px 10px;border-radius:20px}
+  .contacts a:hover{border-color:var(--accent);color:var(--accent)}
+  .print-btn{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:0.85rem;cursor:pointer}
+  section{margin-bottom:36px}
+  h2{font-size:0.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:18px}
+  .entry{margin-bottom:22px}
+  .entry:last-child{margin-bottom:0}
+  .entry-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+  .role{font-weight:700;font-size:1.02rem}
+  .org{color:var(--accent);font-weight:600}
+  .meta{color:var(--muted);font-size:0.88rem;white-space:nowrap}
+  ul.bullets{margin:8px 0 0;padding-left:20px}
+  ul.bullets li{margin-bottom:6px}
+  .skills-grid{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:0.95rem}
+  .skills-grid dt{font-weight:700;color:var(--muted)}
+  .skills-grid dd{margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{background:var(--chip-bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-size:0.85rem}
+  .achievements li{margin-bottom:8px}
+  footer{text-align:center;color:var(--muted);font-size:0.85rem;margin-top:40px}
+  footer a{color:var(--accent)}
+  @media print{
+    .print-btn{display:none}
+    .contacts a{border:none;padding:0;margin-right:12px}
+    body{font-size:0.92rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Shubh Saxena</h1>
+      <p class="title">Lead Engineer · Distributed Systems &amp; High-Scale Architecture</p>
+      <div class="contacts">
+        <a href="mailto:ssshubh97@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/shubh-saxena/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/shubh9457" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://medium.com/@shubhsaxena" target="_blank" rel="noreferrer">Medium</a>
+        <a href="https://leetcode.com/shubhsaxena/" target="_blank" rel="noreferrer">LeetCode</a>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+  </header>
+
+  <section>
+    <h2>Summary</h2>
+    <p>Lead Engineer with 6+ years building high-availability, distributed backend systems at scale — from
+    blockchain-based financial settlement platforms to Go-based contact and search services handling
+    100M+ records. Currently on the Contacts Platform team at GoHighLevel, improving system design and
+    architecture at scale. Open to Staff / Principal Engineer opportunities.</p>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">Lead Engineer <span class="org">— GoHighLevel</span></span>
+        <span class="meta">Apr 2026 – Present · Contacts Platform Team</span>
+      </div>
+      <ul class="bullets">
+        <li>Improving system design and architecture for the Contacts Platform at scale, across high-throughput services used by hundreds of thousands of businesses.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">Lead Backend Engineer / Distributed Systems Specialist <span class="org">— Brevo</span></span>
+        <span class="meta">Jul 2023 – Mar 2026 · Noida, India</span>
+      </div>
+      <ul class="bullets">
+        <li>Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain <strong>1,000+ RPS / 40k+ ops/min</strong> and supporting over <strong>100M+ contacts</strong>.</li>
+        <li>Drove a <strong>50% systemic reduction</strong> in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.</li>
+        <li>Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by <strong>over 30%</strong>.</li>
+        <li>Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">Software Engineer → Senior Software Engineer → Lead Engineer <span class="org">— DLT Labs</span></span>
+        <span class="meta">Aug 2019 – Jun 2023 · Noida, India</span>
+      </div>
+      <ul class="bullets">
+        <li>Served as Core Architect for an enterprise blockchain-based supply chain and financial settlement platform, scaling transaction processing from <strong>2k ops/min to 40k ops/min</strong> through advanced Node.js runtime and garbage collection tuning.</li>
+        <li>Designed a high-performance data replication engine that synthesized multi-source distributed data streams in real-time, drastically reducing cross-system sync lag and unlocking advanced dynamic CRM segmentation.</li>
+        <li>Spearheaded production engineering strategy for mission-critical distributed systems, building automated self-healing workflows and debugging frameworks that preserved <strong>99.99% availability SLAs</strong>.</li>
+        <li>Recognized across 3 elite corporate categories ('Top Achiever', 'Best Improvement', 'Most Efficient Developer') for pioneering technical initiatives that slashed operational infrastructure overhead.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">Segmentation — CRM</span>
+        <span class="meta">Ongoing</span>
+      </div>
+      <ul class="bullets">
+        <li>Designed an abstracted, high-throughput query engine capable of joining massive, disparate historical data stores (ClickHouse, PostgreSQL, Redis, MongoDB) on-the-fly with sub-second latencies — solving dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts.</li>
+        <li>Drove ongoing latency optimizations targeting P99 query reduction across heterogeneous pipelines; established resource budgets per query type to enforce SLA predictability at scale.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role"><a href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noreferrer" style="color:inherit">high-scale-search</a></span>
+        <span class="meta">Personal project</span>
+      </div>
+      <ul class="bullets">
+        <li>Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies Elasticsearch, ClickHouse, Firestore, Redis, and Kafka behind a fault-tolerant search pipeline.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">Plant Disease Classification by Leaf Image</span>
+        <span class="meta">1–2 weeks · CDAC Hackathon</span>
+      </div>
+      <ul class="bullets">
+        <li>Collaborated with a team of three to develop a plant disease classification system during a hackathon organized by CDAC, Hyderabad.</li>
+        <li>Developed an Android application enabling real-time, offline plant disease classification using the device's camera to detect infections directly from leaves.</li>
+        <li>Used an open-source Kaggle dataset (PlantVillage); optimized mobile deployment using TensorFlow Lite for online/offline functionality.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <dl class="skills-grid">
+      <dt>Architecture</dt>
+      <dd>
+        <div class="chips">
+          <span class="chip">High-Throughput System Design</span>
+          <span class="chip">Microservices</span>
+          <span class="chip">High-Availability Systems</span>
+          <span class="chip">Data Segmentation Pipelines</span>
+        </div>
+      </dd>
+      <dt>Languages</dt>
+      <dd>
+        <div class="chips">
+          <span class="chip">Go</span><span class="chip">Node.js</span><span class="chip">Python</span>
+          <span class="chip">JavaScript</span><span class="chip">C++</span><span class="chip">Express.js</span><span class="chip">React</span>
+        </div>
+      </dd>
+      <dt>Data &amp; Streaming</dt>
+      <dd>
+        <div class="chips">
+          <span class="chip">Apache Kafka</span><span class="chip">ClickHouse</span><span class="chip">Redis</span>
+          <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+        </div>
+      </dd>
+      <dt>DevOps</dt>
+      <dd>
+        <div class="chips">
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span>
+          <span class="chip">Ansible</span><span class="chip">CI/CD</span>
+        </div>
+      </dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Achievements</h2>
+    <ul class="bullets achievements">
+      <li><strong>Letter of Appreciation</strong> — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.</li>
+      <li><strong>Problem Solving</strong> — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.</li>
+      <li><strong>Company Recognitions</strong> — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.</li>
+      <li><strong>Winner — AKTU State-Level Football Championship</strong> — champions of AKTU Zonal and State-Level Football Championships (2018–2019).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="role">B.Tech, Computer Science &amp; Engineering</span>
+        <span class="meta">2016 – 2019 · 84.6%</span>
+      </div>
+      <p style="margin:4px 0 0;color:var(--muted)">APJ Abdul Kalam Technical University</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Also see my <a href="https://github.com/shubh9457">GitHub profile</a>. Built with GitHub Pages.</p>
+  </footer>
+
+</div>
+</body>
+</html>
