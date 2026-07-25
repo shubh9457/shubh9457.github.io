@@ -137,6 +137,9 @@
   .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
   .dot.r{background:#ff5f56} .dot.y{background:#ffbd2e} .dot.g{background:#27c93f}
   .term-title{margin-left:8px;color:var(--muted);font-size:.78rem}
+  .last-commit{margin-left:14px;color:var(--muted);font-size:.72rem;white-space:nowrap}
+  .last-commit::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:1px}
+  @media (max-width:560px){ .last-commit{display:none} }
   .term-body{position:relative;z-index:1;padding:22px 26px}
   .print-btn{position:absolute;top:9px;right:80px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
   .print-btn:hover{background:var(--accent);color:var(--bg)}
@@ -182,6 +185,8 @@
   nav.tabbar a .ext{color:var(--comment)}
   nav.tabbar a:hover{color:var(--fg);background:var(--hover-overlay)}
   nav.tabbar a.active{color:var(--fg);background:var(--panel);border-top-color:var(--accent)}
+  .kbd-hint{margin-left:auto;align-self:center;padding-right:14px;color:var(--muted);font-size:.7rem;white-space:nowrap}
+  @media (max-width:700px){ .kbd-hint{display:none} }
   .tabbar-wrap::before,.tabbar-wrap::after{content:'';position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;z-index:1}
   .tabbar-wrap::before{left:1px;background:linear-gradient(90deg, var(--panel-head), transparent);border-radius:8px 0 0 0}
   .tabbar-wrap::after{right:1px;background:linear-gradient(270deg, var(--panel-head), transparent);border-radius:0 8px 0 0}
@@ -237,6 +242,8 @@
   ::selection{background:var(--accent-dim);color:var(--bg)}
 
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .skip-link{position:absolute;left:8px;top:-48px;background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:4px;font-weight:600;font-size:.85rem;z-index:1000;transition:top .15s ease;text-decoration:none}
+  .skip-link:focus{top:8px}
 
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 
@@ -249,7 +256,7 @@
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats{display:none}
+    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff;transform:none !important}
     .term::before{display:none}
@@ -267,6 +274,7 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 <div id="bgfx"></div>
 <div id="progress"></div>
 
@@ -276,6 +284,7 @@
     <div class="term-bar">
       <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
       <span class="term-title">shubh@resume — zsh</span>
+      <span class="last-commit" title="Last commit to this resume">updated Jul 2026</span>
       <button class="print-btn" onclick="window.print()">./download-resume.sh</button>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">
         <span class="thumb"><span class="icon" id="theme-icon">🌙</span></span>
@@ -295,17 +304,19 @@
   </header>
 
   <div class="tabbar-wrap">
-    <nav class="tabbar">
+    <nav class="tabbar" aria-label="Resume sections">
       <a href="#summary" class="active" aria-current="page">readme<span class="ext">.md</span></a>
       <a href="#experience">experience<span class="ext">.log</span></a>
       <a href="#projects">projects<span class="ext">.json</span></a>
       <a href="#skills">skills<span class="ext">.yaml</span></a>
       <a href="#achievements">achievements<span class="ext">.md</span></a>
       <a href="#education">education<span class="ext">.txt</span></a>
+      <span class="kbd-hint" aria-hidden="true">j/k to navigate</span>
     </nav>
   </div>
   <div class="tabbar-spacer"></div>
 
+  <main id="main">
   <section id="summary">
     <div class="term">
       <div class="term-bar"><span class="term-title">~/resume/readme.md</span><button class="copy-btn" type="button" data-copy="summary-body">⧉ copy</button></div>
@@ -441,6 +452,7 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
       </div>
     </div>
   </section>
+  </main>
 
   <div class="site-stats">
     <img src="https://komarev.com/ghpvc/?username=shubh9457&label=views&color=7ee787&style=flat" alt="page view count" loading="lazy" height="20">
@@ -595,6 +607,19 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     }, {rootMargin:'-35% 0px -55% 0px'});
     sections.forEach(function(s){ navIo.observe(s); });
   }
+
+  // vim-style j/k to jump between sections
+  document.addEventListener('keydown', function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.key !== 'j' && e.key !== 'k')) return;
+    var active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) return;
+    var links = Array.prototype.slice.call(tabs);
+    var idx = links.findIndex(function(a){ return a.classList.contains('active'); });
+    if (idx === -1) idx = 0;
+    var nextIdx = e.key === 'j' ? Math.min(idx + 1, links.length - 1) : Math.max(idx - 1, 0);
+    var target = document.getElementById(links[nextIdx].getAttribute('href').slice(1));
+    if (target) target.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+  });
 })();
 </script>
 
