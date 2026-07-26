@@ -1,24 +1,27 @@
 {
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json",
   "basics": {
     "name": "Shubh Saxena",
     "label": "Lead Engineer — Distributed Systems & Golang",
     "email": "ssshubh97@gmail.com",
     "url": "https://shubh9457.github.io/",
     "summary": "Lead Engineer with 6+ years building high-availability, distributed backend systems at scale — from blockchain-based financial settlement platforms to Go-based contact and search services handling 100M+ records. Currently on the Contacts Platform team at GoHighLevel, improving system design and architecture at scale. Open to Staff / Principal Engineer opportunities.",
+    "location": {
+      "countryCode": "IN"
+    },
     "profiles": [
-      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/shubh-saxena/" },
-      { "network": "GitHub", "url": "https://github.com/shubh9457" },
-      { "network": "Medium", "url": "https://medium.com/@shubhsaxena" },
-      { "network": "LeetCode", "url": "https://leetcode.com/shubhsaxena/" }
+      { "network": "LinkedIn", "username": "shubh-saxena", "url": "https://www.linkedin.com/in/shubh-saxena/" },
+      { "network": "GitHub", "username": "shubh9457", "url": "https://github.com/shubh9457" },
+      { "network": "Medium", "username": "shubhsaxena", "url": "https://medium.com/@shubhsaxena" },
+      { "network": "LeetCode", "username": "shubhsaxena", "url": "https://leetcode.com/shubhsaxena/" }
     ]
   },
   "work": [
     {
       "name": "GoHighLevel",
       "position": "Lead Engineer",
-      "location": "Contacts Platform Team",
       "startDate": "2026-04",
-      "endDate": "present",
+      "summary": "Contacts Platform Team",
       "highlights": [
         "Driving system design and architecture improvements for the Contacts Platform, supporting high-throughput services relied on across GoHighLevel's multi-tenant SaaS customer base.",
         "Partnering cross-functionally with product and platform teams to modernize core contact data services for reliability, scalability, and long-term maintainability.",
@@ -56,35 +59,56 @@
   "projects": [
     {
       "name": "Segmentation — CRM",
-      "status": "ongoing",
-      "stack": ["ClickHouse", "PostgreSQL", "Redis", "MongoDB"],
-      "description": "Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability."
+      "description": "Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability.",
+      "keywords": ["ClickHouse", "PostgreSQL", "Redis", "MongoDB"],
+      "roles": ["Lead Engineer"]
     },
     {
       "name": "high-scale-search",
+      "description": "Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores.",
+      "keywords": ["Go", "Elasticsearch", "ClickHouse", "Firestore", "Redis", "Kafka"],
       "url": "https://github.com/shubh9457/high-scale-search",
-      "status": "personal project",
-      "stack": ["Go", "Elasticsearch", "ClickHouse", "Firestore", "Redis", "Kafka"],
-      "description": "Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores."
+      "type": "personal project"
     },
     {
       "name": "Plant Disease Classification by Leaf Image",
-      "status": "CDAC hackathon, 1-2 weeks",
-      "stack": ["Android", "TensorFlow Lite", "Kaggle PlantVillage"],
-      "description": "Team of three; on-device, offline-capable plant disease detection from leaf images via phone camera."
+      "description": "Team of three; on-device, offline-capable plant disease detection from leaf images via phone camera.",
+      "keywords": ["Android", "TensorFlow Lite", "Kaggle PlantVillage"],
+      "type": "CDAC hackathon, 1-2 weeks"
     }
   ],
-  "skills": {
-    "architecture": ["High-Throughput System Design", "Microservices", "High-Availability Systems", "Data Segmentation Pipelines"],
-    "languages": ["Go", "Node.js", "Python", "JavaScript", "C++", "Express.js", "React"],
-    "data_and_streaming": ["Apache Kafka", "ClickHouse", "Redis", "PostgreSQL", "MongoDB"],
-    "devops": ["Docker", "Kubernetes", "Jenkins", "Ansible", "CI/CD"]
-  },
-  "achievements": [
-    "Letter of Appreciation — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.",
-    "Problem Solving — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.",
-    "Company Recognitions — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.",
-    "Winner — AKTU State-Level Football Championship — champions of AKTU Zonal and State-Level Football Championships (2018-2019)."
+  "skills": [
+    { "name": "Architecture", "keywords": ["High-Throughput System Design", "Microservices", "High-Availability Systems", "Data Segmentation Pipelines"] },
+    { "name": "Languages", "keywords": ["Go", "Node.js", "Python", "JavaScript", "C++", "Express.js", "React"] },
+    { "name": "Data & Streaming", "keywords": ["Apache Kafka", "ClickHouse", "Redis", "PostgreSQL", "MongoDB"] },
+    { "name": "DevOps", "keywords": ["Docker", "Kubernetes", "Jenkins", "Ansible", "CI/CD"] }
+  ],
+  "awards": [
+    {
+      "title": "Letter of Appreciation",
+      "awarder": "Dr. Rajib Jha, Associate Professor, IIT Patna",
+      "summary": "For research contributions during a Computer Vision internship."
+    },
+    {
+      "title": "Ace of Initiatives & On-the-Spot Awards",
+      "awarder": "Brevo",
+      "summary": "Recognized multiple times for driving impactful system-wide engineering enhancements."
+    },
+    {
+      "title": "AKTU Zonal & State-Level Football Championship — Winner",
+      "awarder": "APJ Abdul Kalam Technical University",
+      "date": "2018-2019"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Problem Solving",
+      "keywords": ["1,000+ problems solved on LeetCode", "active in the Educative.io developer community"]
+    },
+    {
+      "name": "Football",
+      "keywords": ["competitive player"]
+    }
   ],
   "education": [
     {
