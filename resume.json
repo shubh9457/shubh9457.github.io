@@ -1,0 +1,99 @@
+{
+  "basics": {
+    "name": "Shubh Saxena",
+    "label": "Lead Engineer — Distributed Systems & Golang",
+    "email": "ssshubh97@gmail.com",
+    "url": "https://shubh9457.github.io/",
+    "summary": "Lead Engineer with 6+ years building high-availability, distributed backend systems at scale — from blockchain-based financial settlement platforms to Go-based contact and search services handling 100M+ records. Currently on the Contacts Platform team at GoHighLevel, improving system design and architecture at scale. Open to Staff / Principal Engineer opportunities.",
+    "profiles": [
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/shubh-saxena/" },
+      { "network": "GitHub", "url": "https://github.com/shubh9457" },
+      { "network": "Medium", "url": "https://medium.com/@shubhsaxena" },
+      { "network": "LeetCode", "url": "https://leetcode.com/shubhsaxena/" }
+    ]
+  },
+  "work": [
+    {
+      "name": "GoHighLevel",
+      "position": "Lead Engineer",
+      "location": "Contacts Platform Team",
+      "startDate": "2026-04",
+      "endDate": "present",
+      "highlights": [
+        "Driving system design and architecture improvements for the Contacts Platform, supporting high-throughput services relied on across GoHighLevel's multi-tenant SaaS customer base.",
+        "Partnering cross-functionally with product and platform teams to modernize core contact data services for reliability, scalability, and long-term maintainability.",
+        "Bringing distributed-systems and high-scale architecture expertise from prior roles to guide technical direction, design reviews, and engineering standards on the team.",
+        "Mentoring engineers on the team, raising the bar on system-design rigor and production-readiness practices."
+      ]
+    },
+    {
+      "name": "Brevo",
+      "position": "Lead Backend Engineer / Distributed Systems Specialist",
+      "location": "Noida, India",
+      "startDate": "2023-07",
+      "endDate": "2026-03",
+      "highlights": [
+        "Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain 1,000+ RPS / 40k+ ops/min and supporting over 100M+ contacts.",
+        "Drove a 50% systemic reduction in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.",
+        "Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by over 30%.",
+        "Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks."
+      ]
+    },
+    {
+      "name": "DLT Labs",
+      "position": "Software Engineer → Senior Software Engineer → Lead Engineer",
+      "location": "Noida, India",
+      "startDate": "2019-08",
+      "endDate": "2023-06",
+      "highlights": [
+        "Served as Core Architect for an enterprise blockchain-based supply chain and financial settlement platform, scaling transaction processing from 2k ops/min to 40k ops/min through advanced Node.js runtime and garbage collection tuning.",
+        "Designed a high-performance data replication engine that synthesized multi-source distributed data streams in real-time, drastically reducing cross-system sync lag and unlocking advanced dynamic CRM segmentation.",
+        "Spearheaded production engineering strategy for mission-critical distributed systems, building automated self-healing workflows and debugging frameworks that preserved 99.99% availability SLAs.",
+        "Recognized across 3 elite corporate categories ('Top Achiever', 'Best Improvement', 'Most Efficient Developer') for pioneering technical initiatives that slashed operational infrastructure overhead."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Segmentation — CRM",
+      "status": "ongoing",
+      "stack": ["ClickHouse", "PostgreSQL", "Redis", "MongoDB"],
+      "description": "Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts. Ongoing P99 latency optimizations with per-query-type resource budgets for SLA predictability."
+    },
+    {
+      "name": "high-scale-search",
+      "url": "https://github.com/shubh9457/high-scale-search",
+      "status": "personal project",
+      "stack": ["Go", "Elasticsearch", "ClickHouse", "Firestore", "Redis", "Kafka"],
+      "description": "Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores."
+    },
+    {
+      "name": "Plant Disease Classification by Leaf Image",
+      "status": "CDAC hackathon, 1-2 weeks",
+      "stack": ["Android", "TensorFlow Lite", "Kaggle PlantVillage"],
+      "description": "Team of three; on-device, offline-capable plant disease detection from leaf images via phone camera."
+    }
+  ],
+  "skills": {
+    "architecture": ["High-Throughput System Design", "Microservices", "High-Availability Systems", "Data Segmentation Pipelines"],
+    "languages": ["Go", "Node.js", "Python", "JavaScript", "C++", "Express.js", "React"],
+    "data_and_streaming": ["Apache Kafka", "ClickHouse", "Redis", "PostgreSQL", "MongoDB"],
+    "devops": ["Docker", "Kubernetes", "Jenkins", "Ansible", "CI/CD"]
+  },
+  "achievements": [
+    "Letter of Appreciation — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.",
+    "Problem Solving — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.",
+    "Company Recognitions — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.",
+    "Winner — AKTU State-Level Football Championship — champions of AKTU Zonal and State-Level Football Championships (2018-2019)."
+  ],
+  "education": [
+    {
+      "institution": "APJ Abdul Kalam Technical University",
+      "area": "Computer Science & Engineering",
+      "studyType": "B.Tech",
+      "score": "84.6%",
+      "startDate": "2016",
+      "endDate": "2019"
+    }
+  ]
+}
