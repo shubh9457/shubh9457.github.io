@@ -9,6 +9,7 @@
 <meta name="google-site-verification" content="FtIZ4SRIII2GXykUc0CtawvQ9feIE1Du3CHakF9p0o0" />
 <meta name="author" content="Shubh Saxena">
 <link rel="canonical" href="https://shubh9457.github.io/">
+<link rel="alternate" type="application/json" href="/resume.json" title="Machine-readable JSON resume">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230a0e12'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%237ee787' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" id="theme-color-meta" content="#0a0e12">
 <meta property="og:type" content="website">
@@ -261,6 +262,20 @@
   .help-list li .cmdk-hint{color:var(--accent)}
   .link-btn{margin-left:8px}
 
+  /* toast */
+  .toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-size:.78rem;font-family:var(--font-mono);z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap}
+  .toast[hidden]{display:none}
+
+  /* hidden easter-egg theme */
+  :root[data-theme="matrix"]{
+    --bg:#000401; --panel:#020a04; --panel-head:#010602; --border:#0d3a1a;
+    --fg:#39ff14; --muted:#1f9c3d; --accent:#39ff14; --accent-dim:#1f9c3d;
+    --key:#7CFC00; --string:#39ff14; --comment:#1f7a30; --warn:#adff2f; --red:#ff4d4d;
+    --hover-overlay:rgba(57,255,20,.08); --chip-bg:rgba(57,255,20,.12);
+  }
+  :root[data-theme="matrix"] body{text-shadow:0 0 2px rgba(57,255,20,.25)}
+  :root[data-theme="matrix"] .toast{box-shadow:0 0 18px rgba(57,255,20,.35)}
+
   .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
   .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
   .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
@@ -286,7 +301,7 @@
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay{display:none}
+    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay,.toast{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff;transform:none !important}
     .term::before{display:none}
@@ -329,6 +344,7 @@
         <a href="https://github.com/shubh9457" target="_blank" rel="noreferrer">github<span class="sr-only"> (opens in new tab)</span></a>
         <a href="https://medium.com/@shubhsaxena" target="_blank" rel="noreferrer">medium<span class="sr-only"> (opens in new tab)</span></a>
         <a href="https://leetcode.com/shubhsaxena/" target="_blank" rel="noreferrer">leetcode<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="/resume.json" target="_blank" rel="noreferrer" title="Machine-readable JSON resume">resume.json<span class="sr-only"> (opens in new tab)</span></a>
       </div>
     </div>
   </header>
@@ -534,6 +550,8 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     </ul>
   </div>
 </div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
 (function(){
@@ -750,7 +768,8 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     {label: 'Open LeetCode', hint: '↗ opens new tab', run: function(){ window.open('https://leetcode.com/shubhsaxena/', '_blank', 'noopener'); }},
     {label: 'Print / save as PDF', hint: '⌘P', run: function(){ window.print(); }},
     {label: 'Scroll to top', run: function(){ window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}); }},
-    {label: 'Show keyboard shortcuts', hint: '?', run: function(){ helpOpen(); }}
+    {label: 'Show keyboard shortcuts', hint: '?', run: function(){ helpOpen(); }},
+    {label: 'Open resume.json', hint: 'machine-readable', run: function(){ window.open('/resume.json', '_blank', 'noopener'); }}
   ];
 
   function cmdkFiltered(){
@@ -872,6 +891,48 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
 
   var sbHelpBtn = document.getElementById('sb-help-btn');
   if (sbHelpBtn) sbHelpBtn.addEventListener('click', helpOpen);
+
+  // toast helper
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg){
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.hidden = true; }, 2600);
+  }
+
+  // konami code easter egg -> hidden "matrix" theme
+  var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var konamiPos = 0;
+  function toggleMatrixTheme(){
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme');
+    if (current === 'matrix'){
+      var prev = sessionStorage.getItem('theme-before-matrix') || 'dark';
+      root.setAttribute('data-theme', prev);
+      try{ localStorage.setItem('theme', prev); }catch(e){}
+      showToast('matrix mode: disengaged');
+    } else {
+      try{ sessionStorage.setItem('theme-before-matrix', current || 'dark'); }catch(e){}
+      root.setAttribute('data-theme', 'matrix');
+      try{ localStorage.setItem('theme', 'matrix'); }catch(e){}
+      showToast('sudo access granted — matrix mode engaged');
+    }
+  }
+  document.addEventListener('keydown', function(e){
+    var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === konamiSeq[konamiPos]){
+      konamiPos++;
+      if (konamiPos === konamiSeq.length){
+        konamiPos = 0;
+        toggleMatrixTheme();
+      }
+    } else {
+      konamiPos = (key === konamiSeq[0]) ? 1 : 0;
+    }
+  });
 })();
 </script>
 
