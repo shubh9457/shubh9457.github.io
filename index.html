@@ -314,7 +314,7 @@
   @media print{
     @page{margin:0.4in;size:auto}
     html,body{height:auto !important;overflow:visible !important;background:#fff}
-    #bgfx,.wrap{display:none !important}
+    body>*:not(.print-resume){display:none !important}
     .print-resume{
       display:block;position:static;width:100%;height:auto;
       background:#fff;color:#111;
