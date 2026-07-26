@@ -99,6 +99,7 @@
 
   /* backdrop: faint blueprint grid + scanline, no color noise */
   #bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none}
+  #matrix-rain{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
   #bgfx::before{
     content:'';position:absolute;inset:0;
     background-image:
@@ -309,7 +310,7 @@
   }
 
   @media print{
-    #bgfx,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay,.toast{display:none}
+    #bgfx,#matrix-rain,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay,.toast{display:none}
     body{background:#fff;color:#111;font-size:11.5px}
     .term{border:1px solid #ccc;box-shadow:none;background:#fff;transform:none !important}
     .term::before{display:none}
@@ -329,6 +330,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
 <div id="bgfx"></div>
+<canvas id="matrix-rain" aria-hidden="true" hidden></canvas>
 <div id="progress"></div>
 
 <div class="wrap">
@@ -914,6 +916,59 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
   // konami code easter egg -> hidden "matrix" theme
   var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
   var konamiPos = 0;
+  // matrix digital-rain background
+  var matrixCanvas = document.getElementById('matrix-rain');
+  var matrixCtx = matrixCanvas ? matrixCanvas.getContext('2d') : null;
+  var matrixRAF = null;
+  var matrixCols = [];
+  var matrixFontSize = 16;
+  var matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン0123456789';
+
+  function matrixResize(){
+    if (!matrixCanvas) return;
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+    var columns = Math.ceil(matrixCanvas.width / matrixFontSize);
+    matrixCols = new Array(columns).fill(0);
+  }
+
+  function matrixDraw(){
+    if (!matrixCtx) return;
+    matrixCtx.fillStyle = 'rgba(0,4,1,0.09)';
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    matrixCtx.fillStyle = '#39ff14';
+    matrixCtx.font = matrixFontSize + 'px monospace';
+    for (var i = 0; i < matrixCols.length; i++){
+      var ch = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+      var x = i * matrixFontSize;
+      var y = matrixCols[i] * matrixFontSize;
+      matrixCtx.fillText(ch, x, y);
+      if (y > matrixCanvas.height && Math.random() > 0.975) matrixCols[i] = 0;
+      matrixCols[i]++;
+    }
+    matrixRAF = requestAnimationFrame(matrixDraw);
+  }
+
+  function matrixStart(){
+    if (!matrixCanvas || !matrixCtx || reduce) return;
+    matrixCanvas.hidden = false;
+    matrixResize();
+    matrixCtx.fillStyle = '#000401';
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    if (matrixRAF) cancelAnimationFrame(matrixRAF);
+    matrixDraw();
+  }
+
+  function matrixStop(){
+    if (matrixRAF) cancelAnimationFrame(matrixRAF);
+    matrixRAF = null;
+    if (matrixCanvas) matrixCanvas.hidden = true;
+  }
+
+  window.addEventListener('resize', function(){
+    if (matrixCanvas && !matrixCanvas.hidden) matrixResize();
+  });
+
   function toggleMatrixTheme(){
     var root = document.documentElement;
     var current = root.getAttribute('data-theme');
@@ -921,14 +976,18 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
       var prev = sessionStorage.getItem('theme-before-matrix') || 'dark';
       root.setAttribute('data-theme', prev);
       try{ localStorage.setItem('theme', prev); }catch(e){}
+      matrixStop();
       showToast('matrix mode: disengaged');
     } else {
       try{ sessionStorage.setItem('theme-before-matrix', current || 'dark'); }catch(e){}
       root.setAttribute('data-theme', 'matrix');
       try{ localStorage.setItem('theme', 'matrix'); }catch(e){}
-      showToast('sudo access granted — matrix mode engaged');
+      matrixStart();
+      showToast(reduce ? 'sudo access granted — matrix mode engaged (motion reduced)' : 'sudo access granted — wake up, Neo…');
     }
   }
+  if (document.documentElement.getAttribute('data-theme') === 'matrix') matrixStart();
+
   document.addEventListener('keydown', function(e){
     var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
     if (key === konamiSeq[konamiPos]){
