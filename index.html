@@ -309,19 +309,35 @@
     .copy-btn{margin-left:0}
   }
 
+  .print-resume{display:none}
+
   @media print{
-    #bgfx,#matrix-rain,#progress,#top-btn,.print-btn,.theme-toggle,nav.tabbar,.cursor,.copy-btn,.site-stats,.last-commit,.skip-link,.kbd-hint,.statusbar,.cmdk-overlay,.toast{display:none}
-    body{background:#fff;color:#111;font-size:11.5px}
-    .term{border:1px solid #ccc;box-shadow:none;background:#fff;transform:none !important}
-    .term::before{display:none}
-    .term-bar{background:#f3f3f3}
-    section{opacity:1 !important;transform:none !important}
-    .name{animation:none;background:none;-webkit-background-clip:initial;background-clip:initial;color:#111}
-    .commit-msg,.md-bold{color:#111}
-    .metric{color:#116329}
-    .k{color:#0550ae}.s{color:#8b3d00}.c,.commit-meta,.term-title{color:#666}
-    .diff li::before{color:#116329}
-    .chip{background:transparent;border:1px solid #ccc;color:#111}
+    @page{margin:0.55in}
+    body *{visibility:hidden}
+    .print-resume,.print-resume *{visibility:visible}
+    .print-resume{
+      display:block;position:absolute;top:0;left:0;width:100%;
+      background:#fff;color:#111;
+      font-family:Georgia,'Times New Roman',serif;font-size:11.5px;line-height:1.5;
+    }
+    .print-resume h1{font-size:22px;margin:0 0 2px;color:#111}
+    .print-resume .p-tagline{margin:0 0 6px;font-size:12.5px;color:#333}
+    .print-resume .p-contacts{margin:0 0 14px;font-size:10.5px;color:#333}
+    .print-resume .p-contacts a{color:#111;text-decoration:none}
+    .print-resume h2{
+      font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;
+      margin:16px 0 6px;padding-bottom:3px;border-bottom:1px solid #999;color:#111
+    }
+    .print-resume p{margin:0 0 8px}
+    .print-resume ul{margin:4px 0 10px;padding-left:16px}
+    .print-resume li{margin:0 0 4px}
+    .print-resume .p-job{margin-bottom:10px}
+    .print-resume .p-job-head{display:flex;justify-content:space-between;font-weight:700;font-size:12px}
+    .print-resume .p-job-sub{font-style:italic;color:#444;margin-bottom:3px}
+    .print-resume .p-project{margin-bottom:8px}
+    .print-resume .p-project-head{font-weight:700}
+    .print-resume .p-project-stack{font-weight:400;font-style:italic;color:#444;font-size:10.5px}
+    .print-resume .p-skills-row{margin:0 0 5px}
   }
 </style>
 <script data-goatcounter="https://shubh9457.goatcounter.com/count"
@@ -329,6 +345,88 @@
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="print-resume" aria-hidden="true">
+  <h1>Shubh Saxena</h1>
+  <p class="p-tagline">Lead Engineer — Distributed Systems &amp; Golang</p>
+  <p class="p-contacts">
+    ssshubh97@gmail.com &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/shubh-saxena/">linkedin.com/in/shubh-saxena</a> &nbsp;·&nbsp;
+    <a href="https://github.com/shubh9457">github.com/shubh9457</a> &nbsp;·&nbsp;
+    <a href="https://medium.com/@shubhsaxena">medium.com/@shubhsaxena</a> &nbsp;·&nbsp;
+    <a href="https://leetcode.com/shubhsaxena/">leetcode.com/shubhsaxena</a>
+  </p>
+
+  <h2>Summary</h2>
+  <p>Lead Engineer with 6+ years building high-availability, distributed backend systems at scale — from blockchain-based financial settlement platforms to Go-based contact and search services handling 100M+ records. Currently on the Contacts Platform team at GoHighLevel, improving system design and architecture at scale. Open to Staff / Principal Engineer opportunities.</p>
+
+  <h2>Experience</h2>
+
+  <div class="p-job">
+    <div class="p-job-head"><span>Lead Engineer — GoHighLevel</span><span>Apr 2026 — Present</span></div>
+    <div class="p-job-sub">Contacts Platform Team</div>
+    <ul>
+      <li>Driving system design and architecture improvements for the Contacts Platform, supporting high-throughput services relied on across GoHighLevel's multi-tenant SaaS customer base.</li>
+      <li>Partnering cross-functionally with product and platform teams to modernize core contact data services for reliability, scalability, and long-term maintainability.</li>
+      <li>Bringing distributed-systems and high-scale architecture expertise from prior roles to guide technical direction, design reviews, and engineering standards on the team.</li>
+      <li>Mentoring engineers on the team, raising the bar on system-design rigor and production-readiness practices.</li>
+    </ul>
+  </div>
+
+  <div class="p-job">
+    <div class="p-job-head"><span>Lead Backend Engineer / Distributed Systems Specialist — Brevo</span><span>Jul 2023 — Mar 2026</span></div>
+    <div class="p-job-sub">Noida, India</div>
+    <ul>
+      <li>Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain 1,000+ RPS / 40k+ ops/min and supporting over 100M+ contacts.</li>
+      <li>Drove a 50% systemic reduction in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.</li>
+      <li>Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by over 30%.</li>
+      <li>Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks.</li>
+    </ul>
+  </div>
+
+  <div class="p-job">
+    <div class="p-job-head"><span>Software Engineer → Senior Software Engineer → Lead Engineer — DLT Labs</span><span>Aug 2019 — Jun 2023</span></div>
+    <div class="p-job-sub">Noida, India</div>
+    <ul>
+      <li>Served as Core Architect for an enterprise blockchain-based supply chain and financial settlement platform, scaling transaction processing from 2k ops/min to 40k ops/min through advanced Node.js runtime and garbage collection tuning.</li>
+      <li>Designed a high-performance data replication engine that synthesized multi-source distributed data streams in real-time, drastically reducing cross-system sync lag and unlocking advanced dynamic CRM segmentation.</li>
+      <li>Spearheaded production engineering strategy for mission-critical distributed systems, building automated self-healing workflows and debugging frameworks that preserved 99.99% availability SLAs.</li>
+      <li>Recognized across 3 elite corporate categories ('Top Achiever', 'Best Improvement', 'Most Efficient Developer') for pioneering technical initiatives that slashed operational infrastructure overhead.</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="p-project">
+    <div class="p-project-head">Segmentation — CRM <span class="p-project-stack">(ClickHouse, PostgreSQL, Redis, MongoDB)</span></div>
+    <p>Abstracted, high-throughput query engine joining massive disparate historical data stores on-the-fly with sub-second latencies — dynamic CRM segmentation at 100M+ contact scale with no predefined schema contracts.</p>
+  </div>
+  <div class="p-project">
+    <div class="p-project-head">high-scale-search <span class="p-project-stack">(Go, Elasticsearch, ClickHouse, Firestore, Redis, Kafka)</span></div>
+    <p>Production-grade Go search orchestration service designed for 10B+ records at sub-200ms p99 latency — unifies a fault-tolerant search pipeline across five datastores.</p>
+  </div>
+  <div class="p-project">
+    <div class="p-project-head">Plant Disease Classification by Leaf Image <span class="p-project-stack">(Android, TensorFlow Lite, Kaggle PlantVillage)</span></div>
+    <p>Team of three; on-device, offline-capable plant disease detection from leaf images via phone camera.</p>
+  </div>
+
+  <h2>Skills</h2>
+  <p class="p-skills-row"><b>Architecture:</b> High-Throughput System Design, Microservices, High-Availability Systems, Data Segmentation Pipelines</p>
+  <p class="p-skills-row"><b>Languages:</b> Go, Node.js, Python, JavaScript, C++, Express.js, React</p>
+  <p class="p-skills-row"><b>Data &amp; Streaming:</b> Apache Kafka, ClickHouse, Redis, PostgreSQL, MongoDB</p>
+  <p class="p-skills-row"><b>DevOps:</b> Docker, Kubernetes, Jenkins, Ansible, CI/CD</p>
+
+  <h2>Achievements</h2>
+  <ul>
+    <li><b>Letter of Appreciation</b> — from Dr. Rajib Jha, Associate Professor at IIT Patna, for research contributions during a Computer Vision internship.</li>
+    <li><b>Problem Solving</b> — solved 1,000+ problems on LeetCode; active in the Educative.io developer community.</li>
+    <li><b>Company Recognitions</b> — 'Ace of Initiatives' and multiple 'On-the-Spot' awards at Brevo for driving impactful system-wide enhancements.</li>
+    <li><b>Winner — AKTU State-Level Football Championship</b> — champions of AKTU Zonal and State-Level Football Championships (2018–2019).</li>
+  </ul>
+
+  <h2>Education</h2>
+  <p><b>B.Tech, Computer Science &amp; Engineering</b> — 84.6%<br>APJ Abdul Kalam Technical University · 2016 – 2019</p>
+</div>
+
 <div id="bgfx"></div>
 <canvas id="matrix-rain" aria-hidden="true" hidden></canvas>
 <div id="progress"></div>
