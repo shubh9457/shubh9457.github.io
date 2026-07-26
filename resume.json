@@ -78,10 +78,10 @@
     }
   ],
   "skills": [
-    { "name": "Architecture", "keywords": ["High-Throughput System Design", "Microservices", "High-Availability Systems", "Data Segmentation Pipelines"] },
-    { "name": "Languages", "keywords": ["Go", "Node.js", "Python", "JavaScript", "C++", "Express.js", "React"] },
-    { "name": "Data & Streaming", "keywords": ["Apache Kafka", "ClickHouse", "Redis", "PostgreSQL", "MongoDB"] },
-    { "name": "DevOps", "keywords": ["Docker", "Kubernetes", "Jenkins", "Ansible", "CI/CD"] }
+    { "name": "Architecture", "keywords": ["High-Throughput System Design", "Microservices", "Distributed Systems", "High-Availability Systems", "Data Segmentation Pipelines", "REST APIs"] },
+    { "name": "Languages", "keywords": ["Go", "Node.js", "Python", "JavaScript", "C++", "MATLAB", "Express.js", "React"] },
+    { "name": "Data & Streaming", "keywords": ["Apache Kafka", "ClickHouse", "Redis", "PostgreSQL", "MongoDB", "MySQL", "BigTable"] },
+    { "name": "DevOps", "keywords": ["Docker", "Kubernetes", "Jenkins", "Ansible", "Git", "NGINX", "Shell Scripting", "CI/CD"] }
   ],
   "awards": [
     {
