@@ -173,14 +173,13 @@
   @media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
 
   .contacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .contacts a{color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;font-size:.8rem;transition:.15s ease}
+  .contacts a{display:inline-flex;align-items:center;gap:5px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;font-size:.8rem;transition:.15s ease}
   .contacts a:hover{color:var(--accent);border-color:var(--accent-dim)}
   .contacts a::before{content:'./';color:var(--muted)}
   .contacts a.cta{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
   .contacts a.cta::before{content:none}
   .contacts a.cta:hover{filter:brightness(1.1);color:var(--bg)}
-  .link-icon{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:16px;padding:0 3px;margin-right:6px;border-radius:4px;background:var(--chip-bg);color:var(--accent);font-size:.62rem;font-weight:700;line-height:1;letter-spacing:-.02em;vertical-align:-3px}
-  .contacts a:hover .link-icon{background:var(--accent);color:var(--bg)}
+  .link-icon{color:var(--accent);font-weight:700;font-size:.82em;line-height:1}
 
   /* tab bar nav, VSCode-style */
   .tabbar-wrap{position:sticky;top:0;z-index:20;border-radius:8px 8px 0 0}
