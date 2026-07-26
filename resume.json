@@ -31,15 +31,16 @@
     },
     {
       "name": "Brevo",
-      "position": "Lead Backend Engineer / Distributed Systems Specialist",
+      "position": "Senior Software Engineer → Lead Engineer",
       "location": "Noida, India",
-      "startDate": "2023-07",
+      "startDate": "2023-06",
       "endDate": "2026-03",
       "highlights": [
         "Architected and executed the core migration of mission-critical, high-availability contact management microservices from Node.js to Go, scaling performance to sustain 1,000+ RPS / 40k+ ops/min and supporting over 100M+ contacts.",
         "Drove a 50% systemic reduction in text-based query latencies by redesigning data segmentation pipelines across heterogeneous datastores (PostgreSQL, ClickHouse, Redis), directly improving enterprise-level customer retention.",
         "Established engineering excellence standards and SLAs for cross-functional product teams; introduced rigorous system-design review processes that slashed post-release production anomalies by over 30%.",
-        "Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks."
+        "Led and mentored a high-performing squad of engineers, defining technical direction, establishing robust CI/CD and monitoring guardrails, and accelerating sprint velocity by removing technical debt bottlenecks.",
+        "Promoted to Lead Engineer in January 2026, recognizing technical leadership and system-design impact."
       ]
     },
     {
