@@ -947,9 +947,24 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
   var dotMinimize = document.getElementById('dot-minimize');
   var dotFullscreen = document.getElementById('dot-fullscreen');
 
+  var closeMessages = [
+    "please don't close — what's bad in my resume?",
+    "wait! which section didn't land for you?",
+    "hold on, was it something in the experience section?",
+    "before you go — what would make you reach out?",
+    "nooo, give it one more scroll first",
+    "sudo: permission denied to close this tab",
+    "was the Go/distributed-systems stuff not convincing?",
+    "tell me what's missing and I'll fix it",
+    "closing? at least leave feedback on the way out 😅",
+    "this button doesn't actually work — but tell me why you almost left"
+  ];
+  var lastCloseMsgIdx = -1;
   if (dotClose) dotClose.addEventListener('click', function(){
-    window.close();
-    setTimeout(function(){ showToast("can't close this one that easily — try the tab's own close button"); }, 250);
+    var idx = Math.floor(Math.random() * closeMessages.length);
+    if (idx === lastCloseMsgIdx) idx = (idx + 1) % closeMessages.length;
+    lastCloseMsgIdx = idx;
+    showToast(closeMessages[idx]);
   });
 
   if (dotMinimize) dotMinimize.addEventListener('click', function(){
