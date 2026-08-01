@@ -51,15 +51,20 @@ p{color:var(--fg)}
 .term{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0}
 .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--panel-head);border-bottom:1px solid var(--border)}
 .dot{width:9px;height:9px;border-radius:50%}
-.dot-max,.dot-close{cursor:pointer}
-.dot-max:focus,.dot-close:focus{outline:none}
-.dot-max:focus-visible,.dot-close:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dot-max,.dot-close,.dot-min{cursor:pointer}
+.dot-max:focus,.dot-close:focus,.dot-min:focus{outline:none}
+.dot-max:focus-visible,.dot-close:focus-visible,.dot-min:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 body.no-scroll{overflow:hidden}
 .term.is-expanded{position:fixed;inset:16px;z-index:100;margin:0;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 .term.is-expanded .term-body{flex:1;overflow:auto}
 .term.is-expanded .diagram{width:auto;height:100%;min-width:900px}
+.term.is-minimized .term-body{display:none}
+.term.is-closed{display:none}
 .expand-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
 .expand-backdrop.is-visible{display:block}
+.term-restore{display:none;width:100%;margin:20px 0;padding:10px 16px;background:var(--panel);border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-family:var(--font-mono);font-size:.85rem;cursor:pointer;text-align:center}
+.term-restore.is-visible{display:block}
+.term-restore:hover{color:var(--fg);border-color:var(--accent)}
 .term-title{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);margin-left:8px}
 .term-body{padding:16px 18px;overflow-x:auto}
 .term-body.diagram-body{padding:12px 6px}
@@ -98,7 +103,7 @@ ul.list li{margin-bottom:8px}
 
   <h2>Architecture</h2>
   <div class="term" id="architecture-term">
-    <div class="term-bar"><span class="dot dot-close" style="background:#ff6161" role="button" tabindex="0" aria-label="Close expanded view" title="Close"></span><span class="dot" style="background:#ffcb6b" title="Minimize"></span><span class="dot dot-max" style="background:#7ee787" role="button" tabindex="0" aria-label="Expand diagram" title="Expand"></span><span class="term-title">architecture.svg</span></div>
+    <div class="term-bar"><span class="dot dot-close" style="background:#ff6161" role="button" tabindex="0" aria-label="Close diagram" title="Close"></span><span class="dot dot-min" style="background:#ffcb6b" role="button" tabindex="0" aria-label="Minimize diagram" title="Minimize"></span><span class="dot dot-max" style="background:#7ee787" role="button" tabindex="0" aria-label="Expand diagram" title="Expand"></span><span class="term-title">architecture.svg</span></div>
     <div class="term-body diagram-body">
       <svg class="diagram" viewBox="0 0 720 460" width="100%" xmlns="http://www.w3.org/2000/svg">
         <style>
@@ -153,6 +158,7 @@ ul.list li{margin-bottom:8px}
       </svg>
     </div>
   </div>
+  <button class="term-restore" id="term-restore" type="button">Show architecture.svg</button>
   <div class="expand-backdrop" id="expand-backdrop"></div>
 
   <h2>The 5-level fallback chain</h2>
@@ -225,6 +231,7 @@ document.getElementById('themeToggle').addEventListener('click', function(){
 (function(){
   var term = document.getElementById('architecture-term');
   var backdrop = document.getElementById('expand-backdrop');
+  var restoreBtn = document.getElementById('term-restore');
   function collapse(){
     term.classList.remove('is-expanded');
     backdrop.classList.remove('is-visible');
@@ -235,8 +242,34 @@ document.getElementById('themeToggle').addEventListener('click', function(){
     backdrop.classList.add('is-visible');
     document.body.classList.add('no-scroll');
   }
-  term.querySelector('.dot-max').addEventListener('click', expand);
-  term.querySelector('.dot-close').addEventListener('click', collapse);
+  function toggleMinimize(){
+    term.classList.toggle('is-minimized');
+  }
+  function closeTerm(){
+    if(term.classList.contains('is-expanded')){
+      collapse();
+      return;
+    }
+    term.classList.add('is-closed');
+    restoreBtn.classList.add('is-visible');
+  }
+  function restoreTerm(){
+    term.classList.remove('is-closed');
+    restoreBtn.classList.remove('is-visible');
+  }
+  function bindActivate(el, handler){
+    el.addEventListener('click', handler);
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        handler();
+      }
+    });
+  }
+  bindActivate(term.querySelector('.dot-max'), expand);
+  bindActivate(term.querySelector('.dot-close'), closeTerm);
+  bindActivate(term.querySelector('.dot-min'), toggleMinimize);
+  restoreBtn.addEventListener('click', restoreTerm);
   backdrop.addEventListener('click', collapse);
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape') collapse();
