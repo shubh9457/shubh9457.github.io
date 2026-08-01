@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: High-Scale Search Orchestrator — Shubh Saxena</title>
+<meta name="description" content="Architecture deep-dive on high-scale-search, a Go search orchestration service designed for 10B+ records with a 5-level fallback chain, circuit breakers, and full observability.">
+<link rel="canonical" href="https://shubh9457.github.io/case-study-high-scale-search.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Case Study: High-Scale Search Orchestrator — Shubh Saxena">
+<meta property="og:description" content="Architecture deep-dive on high-scale-search, a Go search orchestration service designed for 10B+ records with a 5-level fallback chain, circuit breakers, and full observability.">
+<meta property="og:url" content="https://shubh9457.github.io/case-study-high-scale-search.html">
+<meta property="og:image" content="https://shubh9457.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e12; --panel:#10151b; --panel-head:#161c24; --border:#232a33;
+  --fg:#d8dee9; --muted:#6b7686; --accent:#7ee787; --accent-dim:#4c9a5c;
+  --blue:#9cdcfe; --orange:#ce9178; --red:#ff6161; --yellow:#ffcb6b;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
+  --fg:#20262e; --muted:#5c6572; --accent:#1a7f37; --accent-dim:#116329;
+  --blue:#0969da; --orange:#953800; --red:#cf222e; --yellow:#9a6700;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);line-height:1.6;transition:background .2s,color .2s}
+a{color:var(--blue)}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+.topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;font-family:var(--font-mono);font-size:.85rem}
+.topnav a{color:var(--muted);text-decoration:none}
+.topnav a:hover{color:var(--accent)}
+.theme-toggle{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:4px 10px;cursor:pointer;font-family:var(--font-mono);font-size:.78rem}
+.kicker{font-family:var(--font-mono);color:var(--accent);font-size:.85rem;margin:0 0 6px}
+h1{font-family:var(--font-sans);font-size:2rem;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+.subtitle{color:var(--muted);font-size:1.05rem;margin:0 0 28px}
+.disclaimer{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--yellow);border-radius:6px;padding:12px 16px;font-size:.9rem;color:var(--muted);margin-bottom:32px}
+.disclaimer b{color:var(--fg)}
+h2{font-family:var(--font-sans);font-size:1.3rem;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+p{color:var(--fg)}
+.term{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0}
+.term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--panel-head);border-bottom:1px solid var(--border)}
+.dot{width:9px;height:9px;border-radius:50%}
+.term-title{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);margin-left:8px}
+.term-body{padding:16px 18px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.85rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-weight:600}
+code{font-family:var(--font-mono);background:var(--panel-head);padding:1px 6px;border-radius:4px;font-size:.88em}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.72rem;color:var(--accent);border:1px solid var(--border);border-radius:20px;padding:2px 10px;margin:2px 4px 2px 0}
+ul.list{padding-left:20px}
+ul.list li{margin-bottom:8px}
+.cta-row{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+.cta{font-family:var(--font-mono);font-size:.85rem;text-decoration:none;border:1px solid var(--border);border-radius:6px;padding:8px 16px;color:var(--fg)}
+.cta:hover{border-color:var(--accent);color:var(--accent)}
+.diagram text{font-family:var(--font-mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topnav">
+    <a href="/#projects">&larr; back to resume.sh</a>
+    <button class="theme-toggle" id="themeToggle" type="button">toggle theme</button>
+  </div>
+
+  <p class="kicker">$ cat case-studies/high-scale-search.md</p>
+  <h1>Building a High-Scale Search Orchestrator in Go</h1>
+  <p class="subtitle">An architecture deep-dive into <code>high-scale-search</code> — a search orchestration service designed for 10B+ records at sub-200ms p99, unifying Elasticsearch, ClickHouse, Firestore, Redis, and Kafka behind a fault-tolerant pipeline.</p>
+
+  <div class="disclaimer"><b>What this is:</b> an independent engineering project exploring architecture patterns for high-scale search — the numbers below (10B+ records, 50K+ QPS, 99.95% uptime) are the system's <b>design targets</b>, not measured production traffic. It's built to the same rigor as a production service: circuit breakers, graceful degradation, structured observability. <a href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noopener">Source on GitHub &rarr;</a></p></div>
+
+  <h2>Why build this</h2>
+  <p>Most side projects that claim to be "high-scale" stop at a README description. The goal here was the opposite: pick one hard, narrow problem — serving search over a dataset too large and too varied for any single datastore to handle well — and implement the actual resilience machinery a real search platform needs, not just the happy path.</p>
+
+  <h2>Architecture</h2>
+  <div class="term">
+    <div class="term-bar"><span class="dot" style="background:#ff6161"></span><span class="dot" style="background:#ffcb6b"></span><span class="dot" style="background:#7ee787"></span><span class="term-title">architecture.svg</span></div>
+    <div class="term-body">
+      <svg class="diagram" viewBox="0 0 720 460" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .box{fill:var(--panel-head);stroke:var(--border);stroke-width:1.5}
+          .boxlabel{fill:var(--fg);font-size:13px;font-weight:600}
+          .boxsub{fill:var(--muted);font-size:10px}
+          .arrow{stroke:var(--muted);stroke-width:1.5;fill:none;marker-end:url(#arrowhead)}
+          .arrow-accent{stroke:var(--accent-dim);stroke-width:1.5;fill:none;marker-end:url(#arrowhead-accent)}
+        </style>
+        <defs>
+          <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--muted)"/></marker>
+          <marker id="arrowhead-accent" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--accent-dim)"/></marker>
+        </defs>
+
+        <rect class="box" x="290" y="10" width="140" height="34" rx="6"/>
+        <text class="boxlabel" x="360" y="31" text-anchor="middle">Client</text>
+
+        <path class="arrow" d="M360,44 L360,68"/>
+        <rect class="box" x="260" y="70" width="200" height="46" rx="6"/>
+        <text class="boxlabel" x="360" y="90" text-anchor="middle">API Gateway</text>
+        <text class="boxsub" x="360" y="106" text-anchor="middle">rate limit · auth · request id</text>
+
+        <path class="arrow" d="M360,116 L360,128"/>
+        <rect class="box" x="220" y="130" width="280" height="130" rx="8"/>
+        <text class="boxlabel" x="360" y="150" text-anchor="middle">Search Orchestrator</text>
+        <text class="boxsub" x="240" y="172">query parser &middot; tokenize / normalize / spell-correct</text>
+        <text class="boxsub" x="240" y="190">intent classifier &middot; fulltext / analytics / facet / autocomplete</text>
+        <text class="boxsub" x="240" y="208">cache lookup &middot; redis query fingerprint</text>
+        <text class="boxsub" x="240" y="226">route &amp; execute &middot; ES / ClickHouse / fan-out</text>
+        <text class="boxsub" x="240" y="244">hydrate &middot; firestore full documents</text>
+
+        <path class="arrow-accent" d="M280,260 L110,300"/>
+        <path class="arrow-accent" d="M360,260 L360,300"/>
+        <path class="arrow-accent" d="M440,260 L610,300"/>
+
+        <rect class="box" x="40" y="302" width="140" height="46" rx="6"/>
+        <text class="boxlabel" x="110" y="322" text-anchor="middle">Redis</text>
+        <text class="boxsub" x="110" y="338" text-anchor="middle">cache · L0/stale fallback</text>
+
+        <rect class="box" x="290" y="302" width="140" height="46" rx="6"/>
+        <text class="boxlabel" x="360" y="322" text-anchor="middle">Elasticsearch</text>
+        <text class="boxsub" x="360" y="338" text-anchor="middle">primary search</text>
+
+        <rect class="box" x="540" y="302" width="140" height="46" rx="6"/>
+        <text class="boxlabel" x="610" y="322" text-anchor="middle">ClickHouse</text>
+        <text class="boxsub" x="610" y="338" text-anchor="middle">analytics · degraded fallback</text>
+
+        <rect class="box" x="10" y="380" width="700" height="70" rx="8" style="fill:none"/>
+        <text class="boxsub" x="20" y="398" style="font-size:11px">Indexing path (write):</text>
+        <text class="boxsub" x="20" y="416" style="font-size:11px">Firestore write &rarr; Kafka (docs.changes) &rarr; Stream Processor &rarr; bulk buffer &rarr; Elasticsearch</text>
+        <text class="boxsub" x="20" y="432" style="font-size:11px">+ ClickHouse changelog + Redis cache invalidation</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>The 5-level fallback chain</h2>
+  <p>Search should never return a hard error. Instead of a single retry-then-fail path, every request falls through a graduated chain of degradation:</p>
+  <table>
+    <tr><th>Level</th><th>Source</th><th>When</th></tr>
+    <tr><td>0</td><td>Redis cache</td><td>Cache hit on query fingerprint</td></tr>
+    <tr><td>1</td><td>Elasticsearch (primary)</td><td>Normal operation, behind a circuit breaker + retry</td></tr>
+    <tr><td>2</td><td>Redis stale cache</td><td>Primary ES fails; serve slightly stale results</td></tr>
+    <tr><td>3</td><td>ClickHouse (degraded)</td><td>Both ES and cache unavailable; basic text search</td></tr>
+    <tr><td>4</td><td>Static popular results</td><td>All backends down; pre-loaded popular results</td></tr>
+  </table>
+
+  <h2>Resilience mechanisms</h2>
+  <ul class="list">
+    <li><b>Circuit breaker</b> — opens after 5 consecutive failures, half-opens after 30s to probe recovery</li>
+    <li><b>Retry with exponential backoff</b> — 2 attempts, 50ms initial wait, 2x multiplier, capped at 500ms</li>
+    <li><b>Dead letter queue</b> — failed Kafka messages route to a DLQ with error metadata for replay, instead of being dropped</li>
+    <li><b>Graceful degradation</b> — ClickHouse, Firestore, and Kafka are each optional; the service starts and serves search even if they're unavailable</li>
+    <li><b>Rate limiting</b> — token-bucket concurrency limiter capped at 1,000 in-flight requests</li>
+    <li><b>Graceful shutdown</b> — SIGINT/SIGTERM handling drains in-flight requests and flushes the indexing buffer before exit</li>
+  </ul>
+
+  <h2>Cache strategy</h2>
+  <p>TTLs are tuned per query type rather than applied uniformly — high-churn data (trending) expires fast, stable data (autocomplete) is cached longer:</p>
+  <table>
+    <tr><th>Query type</th><th>TTL</th><th>Key pattern</th></tr>
+    <tr><td>Autocomplete</td><td>10 min</td><td><code>ac:{prefix_hash}</code></td></tr>
+    <tr><td>Search results</td><td>2 min</td><td><code>sr:{query_hash}</code></td></tr>
+    <tr><td>Facet counts</td><td>5 min</td><td><code>fc:{category}:{filters_hash}</code></td></tr>
+    <tr><td>Trending</td><td>60 sec</td><td><code>trend:{region}</code></td></tr>
+    <tr><td>Stale fallback</td><td>1 hour</td><td><code>sr:stale:{query_hash}</code></td></tr>
+  </table>
+
+  <h2>Observability</h2>
+  <p>Every layer emits Prometheus metrics — request latency histograms by intent/source/status, cache hit/miss counters, per-backend query duration, circuit breaker state, indexing lag, and Kafka consumer lag. Queries over 200ms are logged as slow; over 500ms are marked critical and written to a ClickHouse <code>query_performance</code> table for trend analysis. OpenTelemetry traces carry a consistent <code>trace_id</code> across every backend hop, so a single slow request can be followed end-to-end instead of guessed at.</p>
+
+  <h2>Elasticsearch index strategy</h2>
+  <ul class="list">
+    <li>Time-partitioned index naming: <code>search-{type}-{region}-{yyyy.MM}</code></li>
+    <li>Tiered storage — hot (NVMe, 3 months) &rarr; warm (SSD, 3–12 months) &rarr; cold (object storage)</li>
+    <li>Minimal <code>_source</code> — only searchable fields are indexed; full documents are hydrated from Firestore on read, keeping the index lean</li>
+    <li>Score blending: <code>_score * (1 + log1p(popularity_score))</code> so relevance and popularity aren't fought over in separate passes</li>
+  </ul>
+
+  <h2>What I'd do differently</h2>
+  <p>The fallback chain and circuit breaker were the most valuable parts to build for real rather than describe abstractly — the interesting decisions (backoff caps, half-open probe timing, what "degraded" should even mean for a given query type) only show up once you implement it. If I extended this further, the next real gap is load-testing the fallback transitions themselves — proving level 1&rarr;2&rarr;3 handoffs stay correct under actual concurrent failure, not just in isolation.</p>
+
+  <div class="cta-row">
+    <a class="cta" href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noopener">&#9733; view source</a>
+    <a class="cta" href="/#projects">&larr; back to resume.sh</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var saved = localStorage.getItem('theme');
+  var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+document.getElementById('themeToggle').addEventListener('click', function(){
+  var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('theme', next); }catch(e){}
+});
+</script>
+</body>
+</html>
