@@ -51,6 +51,12 @@ p{color:var(--fg)}
 .term{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0}
 .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--panel-head);border-bottom:1px solid var(--border)}
 .dot{width:9px;height:9px;border-radius:50%}
+.dot-max,.dot-close{cursor:pointer}
+.term.is-expanded{position:fixed;inset:16px;z-index:100;margin:0;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.term.is-expanded .term-body{flex:1;overflow:auto}
+.term.is-expanded .diagram{width:auto;height:100%;min-width:900px}
+.expand-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+.expand-backdrop.is-visible{display:block}
 .term-title{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);margin-left:8px}
 .term-body{padding:16px 18px;overflow-x:auto}
 .term-body.diagram-body{padding:12px 6px}
@@ -88,8 +94,8 @@ ul.list li{margin-bottom:8px}
   <p>Most side projects that claim to be "high-scale" stop at a README description. The goal here was the opposite: pick one hard, narrow problem — serving search over a dataset too large and too varied for any single datastore to handle well — and implement the actual resilience machinery a real search platform needs, not just the happy path.</p>
 
   <h2>Architecture</h2>
-  <div class="term">
-    <div class="term-bar"><span class="dot" style="background:#ff6161"></span><span class="dot" style="background:#ffcb6b"></span><span class="dot" style="background:#7ee787"></span><span class="term-title">architecture.svg</span></div>
+  <div class="term" id="architecture-term">
+    <div class="term-bar"><span class="dot dot-close" style="background:#ff6161" role="button" tabindex="0" aria-label="Close expanded view" title="Close"></span><span class="dot" style="background:#ffcb6b" title="Minimize"></span><span class="dot dot-max" style="background:#7ee787" role="button" tabindex="0" aria-label="Expand diagram" title="Expand"></span><span class="term-title">architecture.svg</span></div>
     <div class="term-body diagram-body">
       <svg class="diagram" viewBox="0 0 720 460" width="100%" xmlns="http://www.w3.org/2000/svg">
         <style>
@@ -144,6 +150,7 @@ ul.list li{margin-bottom:8px}
       </svg>
     </div>
   </div>
+  <div class="expand-backdrop" id="expand-backdrop"></div>
 
   <h2>The 5-level fallback chain</h2>
   <p>Search should never return a hard error. Instead of a single retry-then-fail path, every request falls through a graduated chain of degradation:</p>
@@ -212,6 +219,24 @@ document.getElementById('themeToggle').addEventListener('click', function(){
   document.documentElement.setAttribute('data-theme', next);
   try{ localStorage.setItem('theme', next); }catch(e){}
 });
+(function(){
+  var term = document.getElementById('architecture-term');
+  var backdrop = document.getElementById('expand-backdrop');
+  function collapse(){
+    term.classList.remove('is-expanded');
+    backdrop.classList.remove('is-visible');
+  }
+  function expand(){
+    term.classList.add('is-expanded');
+    backdrop.classList.add('is-visible');
+  }
+  term.querySelector('.dot-max').addEventListener('click', expand);
+  term.querySelector('.dot-close').addEventListener('click', collapse);
+  backdrop.addEventListener('click', collapse);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') collapse();
+  });
+})();
 </script>
 </body>
 </html>
