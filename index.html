@@ -360,6 +360,34 @@
     .print-resume .p-edu-degree{font-weight:700;font-size:10.5px}
     .print-resume .p-edu-school{color:var(--pr-sub);font-size:9.5px}
   }
+
+  /* Mobile print/PDF pipelines (iOS Safari, Android Chrome) ignore @page size:auto and
+     force a fixed Letter/A4 page height, so the fix here is a tighter layout that fits
+     that fixed height — not a page-size change. Scoped to touch devices via pointer:coarse
+     so desktop print (which already fits one auto-sized page) is unaffected. */
+  @media print and (pointer:coarse){
+    .print-resume{font-size:8.5px;line-height:1.25}
+    .print-resume h1{font-size:24px}
+    .print-resume .p-tagline{font-size:11px;margin:2px 0 6px}
+    .print-resume .p-contacts{font-size:8px}
+    .print-resume h2{font-size:10px;margin:10px 0 5px;padding-bottom:2px}
+    .print-resume p{margin:0 0 4px}
+    .print-resume ul{margin:2px 0 5px}
+    .print-resume li{margin:0 0 2px}
+    .print-resume .p-job{margin-bottom:7px}
+    .print-resume .p-job-title{font-size:10px}
+    .print-resume .p-job-dates{font-size:8px}
+    .print-resume .p-job-sub{font-size:8.5px;margin-bottom:2px}
+    .print-resume .p-project{margin-bottom:5px}
+    .print-resume .p-project-head{font-size:9px}
+    .print-resume .p-project-stack{font-size:7.5px}
+    .print-resume .p-skill-group{margin-bottom:6px}
+    .print-resume .p-skill-group b{font-size:8.5px;margin-bottom:2px}
+    .print-resume .p-skill-group span{font-size:8px}
+    .print-resume .p-side li{margin-bottom:4px}
+    .print-resume .p-edu-degree{font-size:9px}
+    .print-resume .p-edu-school{font-size:8px}
+  }
 </style>
 <script data-goatcounter="https://shubh9457.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
