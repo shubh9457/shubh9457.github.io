@@ -25,7 +25,7 @@
   --comment:#1f7a30; --hover-overlay:rgba(57,255,20,.08); --chip-bg:rgba(57,255,20,.12);
 }
 :root[data-theme="matrix"] body{text-shadow:0 0 2px rgba(57,255,20,.25)}
-:root[data-theme="matrix"] .toast{box-shadow:0 0 18px rgba(57,255,20,.35)}
+:root[data-theme="matrix"] .toast-stack .toast{box-shadow:0 0 18px rgba(57,255,20,.35)}
 
 #matrix-rain{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
 
@@ -106,9 +106,10 @@ html,body{transition:background-color .25s ease, color .25s ease}
 .help-list li{cursor:default}
 .help-list li .cmdk-hint{color:var(--accent)}
 
-/* toast */
-.toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-size:.78rem;font-family:var(--font-mono);z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap}
-.toast[hidden]{display:none}
+/* toast stack */
+.toast-stack{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column-reverse;align-items:center;gap:8px;pointer-events:none}
+.toast-stack .toast{background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-size:.78rem;font-family:var(--font-mono);box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
+.toast-stack .toast.is-visible{opacity:1;transform:translateY(0)}
 
 ::selection{background:var(--accent-dim);color:var(--bg)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
