@@ -1,0 +1,13 @@
+<div class="cmdk-overlay" id="help-overlay" hidden>
+  <div class="cmdk help-panel" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+    <div class="cmdk-input-row">
+      <span class="cmdk-prompt" aria-hidden="true">?</span>
+      <span class="help-title">Keyboard shortcuts</span>
+      <kbd class="cmdk-esc">esc</kbd>
+    </div>
+    <ul class="cmdk-list help-list">
+      {% for s in page.shortcuts %}<li><span>{{ s.label }}</span><span class="cmdk-hint">{{ s.hint }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

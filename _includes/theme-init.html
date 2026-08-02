@@ -1,0 +1,11 @@
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    var tcm = document.getElementById('theme-color-meta');
+    if (tcm) tcm.setAttribute('content', theme === 'light' ? '#f3f4f6' : '#0a0e12');
+  }catch(e){}
+})();
+</script>

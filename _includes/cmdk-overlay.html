@@ -1,0 +1,10 @@
+<div class="cmdk-overlay" id="cmdk-overlay" hidden>
+  <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-input-row">
+      <span class="cmdk-prompt" aria-hidden="true">›</span>
+      <input type="text" id="cmdk-input" class="cmdk-input" placeholder="{{ page.cmdk_placeholder | default: 'Type a command…' }}" autocomplete="off" spellcheck="false" aria-label="Command palette input">
+      <kbd class="cmdk-esc">esc</kbd>
+    </div>
+    <ul class="cmdk-list" id="cmdk-list"></ul>
+  </div>
+</div>
