@@ -1,0 +1,8 @@
+title: Shubh Saxena
+url: "https://shubh9457.github.io"
+markdown: kramdown
+plugins: []
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
