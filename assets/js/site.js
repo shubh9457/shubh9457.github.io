@@ -63,15 +63,27 @@
     onScroll();
   }
 
-  // ---- toast helper ----
-  var toastEl = document.getElementById('toast');
-  var toastTimer = null;
+  // ---- toast helper (stacked — each call gets its own bubble) ----
+  var toastStack = document.getElementById('toast-stack');
+  var MAX_TOASTS = 4;
   function showToast(msg){
-    if (!toastEl) return;
-    toastEl.textContent = msg;
-    toastEl.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toastEl.hidden = true; }, 2600);
+    if (!toastStack) return;
+    while (toastStack.children.length >= MAX_TOASTS) {
+      toastStack.removeChild(toastStack.firstElementChild);
+    }
+    var el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    toastStack.appendChild(el);
+    requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+    setTimeout(function(){
+      el.classList.remove('is-visible');
+      el.addEventListener('transitionend', function remove(){
+        el.removeEventListener('transitionend', remove);
+        if (el.parentNode) el.parentNode.removeChild(el);
+      });
+      setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 300);
+    }, 2600);
   }
 
   // ---- command palette ----
