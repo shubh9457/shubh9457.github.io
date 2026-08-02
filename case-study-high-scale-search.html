@@ -1,97 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Study: High-Scale Search Orchestrator — Shubh Saxena</title>
-<meta name="description" content="Architecture deep-dive on high-scale-search, a Go search orchestration service designed for 10B+ records with a 5-level fallback chain, circuit breakers, and full observability.">
-<link rel="canonical" href="https://shubh9457.github.io/case-study-high-scale-search.html">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Case Study: High-Scale Search Orchestrator — Shubh Saxena">
-<meta property="og:description" content="Architecture deep-dive on high-scale-search, a Go search orchestration service designed for 10B+ records with a 5-level fallback chain, circuit breakers, and full observability.">
-<meta property="og:url" content="https://shubh9457.github.io/case-study-high-scale-search.html">
-<meta property="og:image" content="https://shubh9457.github.io/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0a0e12; --panel:#10151b; --panel-head:#161c24; --border:#232a33;
-  --fg:#d8dee9; --muted:#6b7686; --accent:#7ee787; --accent-dim:#4c9a5c;
-  --blue:#9cdcfe; --orange:#ce9178; --red:#ff6161; --yellow:#ffcb6b;
-  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-}
-:root[data-theme="light"]{
-  --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
-  --fg:#20262e; --muted:#5c6572; --accent:#1a7f37; --accent-dim:#116329;
-  --blue:#0969da; --orange:#953800; --red:#cf222e; --yellow:#9a6700;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);line-height:1.6;transition:background .2s,color .2s}
-a{color:var(--blue)}
-.wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px}
-.topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;font-family:var(--font-mono);font-size:.85rem}
-.topnav a{color:var(--muted);text-decoration:none}
-.topnav a:hover{color:var(--accent)}
-.theme-toggle{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:4px 10px;cursor:pointer;font-family:var(--font-mono);font-size:.78rem}
-.kicker{font-family:var(--font-mono);color:var(--accent);font-size:.85rem;margin:0 0 6px}
-h1{font-family:var(--font-sans);font-size:2rem;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
-.subtitle{color:var(--muted);font-size:1.05rem;margin:0 0 28px}
-.disclaimer{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--yellow);border-radius:6px;padding:12px 16px;font-size:.9rem;color:var(--muted);margin-bottom:32px}
-.disclaimer b{color:var(--fg)}
-h2{font-family:var(--font-sans);font-size:1.3rem;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-p{color:var(--fg)}
-.term{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0}
-.term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--panel-head);border-bottom:1px solid var(--border)}
-.dot{width:9px;height:9px;border-radius:50%}
-.dot-max,.dot-close,.dot-min{cursor:pointer}
-.dot-max:focus,.dot-close:focus,.dot-min:focus{outline:none}
-.dot-max:focus-visible,.dot-close:focus-visible,.dot-min:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-body.no-scroll{overflow:hidden}
-.term.is-expanded{position:fixed;inset:16px;z-index:100;margin:0;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.term.is-expanded .term-body{flex:1;overflow:auto;text-align:center}
-.term.is-expanded .diagram{width:auto;height:100%;min-width:900px}
-.term.is-minimized .term-body{display:none}
-.term.is-closed{display:none}
-.expand-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
-.expand-backdrop.is-visible{display:block}
-.term-restore{display:none;width:100%;margin:20px 0;padding:10px 16px;background:var(--panel);border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-family:var(--font-mono);font-size:.85rem;cursor:pointer;text-align:center}
-.term-restore.is-visible{display:block}
-.term-restore:hover{color:var(--fg);border-color:var(--accent)}
-.term-title{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);margin-left:8px}
-.term-body{padding:16px 18px;overflow-x:auto}
-.term-body.diagram-body{padding:12px 6px}
-.table-wrap{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:16px 0}
-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.85rem}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
-th{background:var(--panel-head);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
-tbody tr:nth-child(even){background:var(--panel-head)}
-tbody tr:last-child td{border-bottom:none}
-th{color:var(--muted);font-weight:600}
-code{font-family:var(--font-mono);background:var(--panel-head);padding:1px 6px;border-radius:4px;font-size:.88em}
-.tag{display:inline-block;font-family:var(--font-mono);font-size:.72rem;color:var(--accent);border:1px solid var(--border);border-radius:20px;padding:2px 10px;margin:2px 4px 2px 0}
-ul.list{padding-left:20px}
-ul.list li{margin-bottom:8px}
-.cta-row{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
-.cta{font-family:var(--font-mono);font-size:.85rem;text-decoration:none;border:1px solid var(--border);border-radius:6px;padding:8px 16px;color:var(--fg)}
-.cta:hover{border-color:var(--accent);color:var(--accent)}
-.diagram text{font-family:var(--font-mono)}
-</style>
-</head>
-<body>
+---
+layout: base
+title: "Case Study: High-Scale Search Orchestrator — Shubh Saxena"
+description: "Architecture deep-dive on high-scale-search, a Go search orchestration service designed for 10B+ records with a 5-level fallback chain, circuit breakers, and full observability."
+canonical: "https://shubh9457.github.io/case-study-high-scale-search.html"
+theme_color: "#0a0e12"
+og_type: article
+extra_css: /assets/css/case-study.css
+sb_section: "case-study-high-scale-search.html"
+shortcuts:
+  - label: "Command palette"
+    hint: "⌘K / Ctrl+K"
+  - label: "This help"
+    hint: "?"
+  - label: "Close any overlay / collapse diagram"
+    hint: "esc"
+---
 <div class="wrap">
   <div class="topnav">
     <a href="/#projects">&larr; back to resume.sh</a>
-    <button class="theme-toggle" id="themeToggle" type="button">toggle theme</button>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">
+      <span class="thumb"><span class="icon" id="theme-icon">🌙</span></span>
+    </button>
   </div>
 
+  <div class="article">
   <p class="kicker">$ cat case-studies/high-scale-search.md</p>
   <h1>Building a High-Scale Search Orchestrator in Go</h1>
   <p class="subtitle">An architecture deep-dive into <code>high-scale-search</code> — a search orchestration service designed for 10B+ records at sub-200ms p99, unifying Elasticsearch, ClickHouse, Firestore, Redis, and Kafka behind a fault-tolerant pipeline.</p>
@@ -215,19 +147,23 @@ ul.list li{margin-bottom:8px}
     <a class="cta" href="https://github.com/shubh9457/high-scale-search" target="_blank" rel="noopener">&#9733; view source</a>
     <a class="cta" href="/#projects">&larr; back to resume.sh</a>
   </div>
+  </div>
+
+  <div class="site-stats">
+    <img src="https://komarev.com/ghpvc/?username=shubh9457&label=views&color=7ee787&style=flat" alt="page view count" loading="lazy" height="20">
+  </div>
 </div>
 
 <script>
-(function(){
-  var saved = localStorage.getItem('theme');
-  var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  document.documentElement.setAttribute('data-theme', theme);
-})();
-document.getElementById('themeToggle').addEventListener('click', function(){
-  var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  try{ localStorage.setItem('theme', next); }catch(e){}
-});
+window.SITE_COMMANDS = [
+  {label: 'Toggle theme', hint: 'dark/light', run: function(){ Site.toggleTheme(); }},
+  {label: 'Expand architecture diagram', run: function(){ var d = document.querySelector('.dot-max'); if (d) d.click(); }},
+  {label: 'View source on GitHub', hint: '↗ opens new tab', run: function(){ window.open('https://github.com/shubh9457/high-scale-search', '_blank', 'noopener'); }},
+  {label: 'Back to resume', run: function(){ window.location.href = '/#projects'; }},
+  {label: 'Scroll to top', run: function(){ Site.scrollToTop(); }},
+  {label: 'Show keyboard shortcuts', hint: '?', run: function(){ Site.openHelp(); }}
+];
+
 (function(){
   var term = document.getElementById('architecture-term');
   var backdrop = document.getElementById('expand-backdrop');
@@ -276,5 +212,3 @@ document.getElementById('themeToggle').addEventListener('click', function(){
   });
 })();
 </script>
-</body>
-</html>

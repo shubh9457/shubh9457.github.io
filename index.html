@@ -1,398 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shubh Saxena — Lead Engineer, Distributed Systems & Golang | Resume</title>
-<meta name="description" content="Shubh Saxena — Lead Engineer with 6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles. Experience, projects & resume.">
-<meta name="robots" content="index, follow">
-<meta name="google-site-verification" content="FtIZ4SRIII2GXykUc0CtawvQ9feIE1Du3CHakF9p0o0" />
-<meta name="author" content="Shubh Saxena">
-<link rel="canonical" href="https://shubh9457.github.io/">
-<link rel="alternate" type="application/json" href="/resume.json" title="Machine-readable JSON resume">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230a0e12'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%237ee787' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<meta name="theme-color" id="theme-color-meta" content="#0a0e12">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://shubh9457.github.io/">
-<meta property="og:title" content="Shubh Saxena — Lead Engineer, Distributed Systems & Golang">
-<meta property="og:description" content="6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles.">
-<meta property="og:image" content="https://shubh9457.github.io/og-image.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Shubh Saxena — Lead Engineer, Distributed Systems & Golang">
-<meta name="twitter:description" content="6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles.">
-<meta name="twitter:image" content="https://shubh9457.github.io/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Shubh Saxena",
-  "jobTitle": "Lead Engineer",
-  "description": "Lead Engineer with 6+ years building high-availability, distributed backend systems at scale. Open to Staff / Principal Engineer roles.",
-  "url": "https://shubh9457.github.io/",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "GoHighLevel"
-  },
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "APJ Abdul Kalam Technical University"
-  },
-  "knowsAbout": [
-    "Go", "Node.js", "Python", "JavaScript", "Distributed Systems",
-    "High-Availability Systems", "Microservices", "Apache Kafka",
-    "ClickHouse", "Redis", "PostgreSQL", "MongoDB", "Kubernetes", "Docker"
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/in/shubh-saxena/",
-    "https://github.com/shubh9457",
-    "https://medium.com/@shubhsaxena",
-    "https://leetcode.com/shubhsaxena/"
-  ]
-}
-</script>
-<script>
-(function(){
-  try{
-    var saved = localStorage.getItem('theme');
-    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    document.documentElement.setAttribute('data-theme', theme);
-    var tcm = document.getElementById('theme-color-meta');
-    if (tcm) tcm.setAttribute('content', theme === 'light' ? '#f3f4f6' : '#0a0e12');
-  }catch(e){}
-})();
-</script>
-<style>
-  :root{
-    --bg:#0a0e12; --panel:#10151b; --panel-head:#161c24; --border:#232a33;
-    --fg:#d8dee9; --muted:#6b7686; --accent:#7ee787; --accent-dim:#4c9a5c;
-    --key:#9cdcfe; --string:#ce9178; --comment:#6a9955; --warn:#ffcb6b; --red:#ff6161;
-    --shadow:0 8px 24px rgba(0,0,0,.35); --hover-overlay:rgba(255,255,255,.03);
-    --chip-bg:rgba(126,231,135,.12);
-    --code-cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='18'%3E%3Crect width='2' height='18' fill='%237ee787'/%3E%3C/svg%3E") 2 9,text;
-    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  }
-  :root[data-theme="light"]{
-    --bg:#f3f4f6; --panel:#ffffff; --panel-head:#eef0f3; --border:#d7dbe0;
-    --fg:#20262e; --muted:#5c6572; --accent:#1a7f37; --accent-dim:#116329;
-    --key:#0550ae; --string:#953800; --comment:#59873a; --warn:#9a6700; --red:#cf222e;
-    --shadow:0 8px 24px rgba(20,25,35,.08); --hover-overlay:rgba(0,0,0,.035);
-    --chip-bg:rgba(26,127,55,.10);
-    --code-cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='18'%3E%3Crect width='2' height='18' fill='%231a7f37'/%3E%3C/svg%3E") 2 9,text;
-  }
-  html,body{transition:background-color .25s ease, color .25s ease}
-  .term,.term-bar,nav.tabbar,#top-btn{transition:background-color .25s ease, border-color .25s ease, box-shadow .25s ease}
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--bg); color:var(--fg);
-    font-family:var(--font-mono);
-    font-size:14.5px; line-height:1.7; overflow-x:hidden; position:relative;
-  }
-
-  /* backdrop: faint blueprint grid + scanline, no color noise */
-  #bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none}
-  #matrix-rain{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
-  #bgfx::before{
-    content:'';position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size:32px 32px;
-    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 85%);
-            mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 85%);
-  }
-  #bgfx::after{
-    content:'';position:absolute;inset:0;
-    background:repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0px, rgba(255,255,255,.018) 1px, transparent 1px, transparent 3px);
-    animation:scan 9s linear infinite;
-    opacity:.5;
-  }
-  :root[data-theme="light"] #bgfx::before{
-    background-image:
-      linear-gradient(rgba(0,0,0,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px);
-  }
-  :root[data-theme="light"] #bgfx::after{
-    background:repeating-linear-gradient(0deg, rgba(0,0,0,.012) 0px, rgba(0,0,0,.012) 1px, transparent 1px, transparent 3px);
-  }
-  @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(3px)}}
-  @media (prefers-reduced-motion: reduce){ #bgfx::after{animation:none} }
-
-  #progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);z-index:100;transition:width .1s linear}
-
-  .wrap{max-width:800px;margin:0 auto;padding:40px 20px 80px;position:relative;z-index:1}
-
-  /* terminal window chrome, reused for header + every section */
-  .term{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-  .term::before{content:'';position:absolute;left:var(--mx,50%);top:var(--my,50%);width:420px;height:420px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle, var(--accent) 0%, transparent 70%);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:0}
-  @media (hover:hover){
-    .term:hover::before{opacity:.07}
-    .term:hover{transform:translateY(-2px);box-shadow:var(--shadow),0 0 0 1px var(--accent-dim)}
-  }
-  .term-bar{position:relative;z-index:1;display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--panel-head);border-bottom:1px solid var(--border)}
-  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:none;padding:0;cursor:pointer;transition:filter .12s ease,transform .12s ease}
-  .dot:hover{filter:brightness(1.2);transform:scale(1.15)}
-  .dot:active{filter:brightness(.85);transform:scale(.95)}
-  .dot.r{background:#ff5f56} .dot.y{background:#ffbd2e} .dot.g{background:#27c93f}
-  body.minimized nav.tabbar,body.minimized main,body.minimized .site-stats{display:none}
-  .term-title{margin-left:8px;color:var(--muted);font-size:.78rem}
-  .last-commit{margin-left:14px;color:var(--muted);font-size:.72rem;white-space:nowrap}
-  .last-commit::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:1px}
-  @media (max-width:560px){ .last-commit{display:none} }
-  .term-body{position:relative;z-index:1;padding:22px 26px}
-  .print-btn{position:absolute;top:9px;right:80px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
-  .print-btn:hover{background:var(--accent);color:var(--bg)}
-
-  .theme-toggle{position:absolute;top:8px;right:14px;width:52px;height:24px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer;padding:0;display:flex;align-items:center;transition:background-color .3s ease,border-color .3s ease}
-  .theme-toggle .thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);margin-left:2px;display:flex;align-items:center;justify-content:center;font-size:11px;transform:translateX(0);transition:transform .3s cubic-bezier(.4,0,.2,1),background-color .3s ease;line-height:1}
-  :root[data-theme="light"] .theme-toggle .thumb{transform:translateX(28px)}
-  .theme-toggle .thumb .icon{display:inline-block;transition:transform .35s ease, opacity .25s ease}
-  @media (prefers-reduced-motion: reduce){
-    .theme-toggle .thumb, .theme-toggle{transition:none}
-    .theme-toggle .thumb .icon{transition:none}
-  }
-
-  .prompt{color:var(--accent)}
-  .prompt::before{content:'$ ';color:var(--muted)}
-  .name{font-family:var(--font-sans);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:2px 0 2px;
-    background:linear-gradient(90deg, var(--fg) 0%, var(--accent) 50%, var(--fg) 100%);
-    background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:name-sheen 6s ease-in-out infinite}
-  @keyframes name-sheen{0%{background-position:0% 0}50%{background-position:100% 0}100%{background-position:0% 0}}
-  @media (prefers-reduced-motion: reduce){ .name{animation:none;background-position:0% 0} }
-  @media (prefers-reduced-motion: reduce){ .dot:hover,.dot:active{transform:none} }
-  #boot{white-space:pre-wrap;min-height:5.2em}
-  #boot .comment{color:var(--comment)}
-  #boot .out{color:var(--fg)}
-  #boot .warn{color:var(--warn)}
-  .cursor{display:inline-block;width:8px;height:1.1em;background:var(--accent);vertical-align:text-bottom;margin-left:4px;animation:blink 1s step-end infinite}
-  @keyframes blink{50%{opacity:0}}
-  @media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
-
-  .contacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .contacts a{display:inline-flex;align-items:center;gap:5px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;font-size:.8rem;transition:.15s ease}
-  .contacts a:hover{color:var(--accent);border-color:var(--accent-dim)}
-  .contacts a::before{content:'./';color:var(--muted)}
-  .contacts a.cta{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
-  .contacts a.cta::before{content:none}
-  .contacts a.cta:hover{filter:brightness(1.1);color:var(--bg)}
-  .link-icon{color:var(--accent);font-weight:700;font-size:.82em;line-height:1}
-
-  /* tab bar nav, VSCode-style */
-  .tabbar-wrap{position:sticky;top:0;z-index:20;border-radius:8px 8px 0 0}
-  nav.tabbar{display:flex;overflow-x:auto;background:var(--panel-head);border:1px solid var(--border);border-radius:8px 8px 0 0;scrollbar-width:none}
-  nav.tabbar::-webkit-scrollbar{display:none}
-  nav.tabbar a{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.78rem;color:var(--muted);text-decoration:none;border-right:1px solid var(--border);border-top:2px solid transparent;background:transparent;transition:.15s ease}
-  nav.tabbar a .ext{color:var(--comment)}
-  nav.tabbar a:hover{color:var(--fg);background:var(--hover-overlay)}
-  nav.tabbar a.active{color:var(--fg);background:var(--panel);border-top-color:var(--accent)}
-  .kbd-hint{margin-left:auto;align-self:center;padding-right:14px;color:var(--muted);font-size:.7rem;white-space:nowrap}
-  @media (max-width:700px){ .kbd-hint{display:none} }
-  .tabbar-wrap::before,.tabbar-wrap::after{content:'';position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;z-index:1}
-  .tabbar-wrap::before{left:1px;background:linear-gradient(90deg, var(--panel-head), transparent);border-radius:8px 0 0 0}
-  .tabbar-wrap::after{right:1px;background:linear-gradient(270deg, var(--panel-head), transparent);border-radius:0 8px 0 0}
-  .tabbar-spacer{height:1px}
-
-  section{margin-bottom:0;opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease;scroll-margin-top:52px}
-  section.in{opacity:1;transform:translateY(0)}
-  section .term{border-radius:0 0 8px 8px;border-top:none;margin-top:0;margin-bottom:26px}
-  section:first-of-type .term{border-radius:8px}
-
-  p{margin:0 0 10px}
-  p:last-child{margin-bottom:0}
-
-  /* git-log style experience entries */
-  .commit{padding:14px 0;border-bottom:1px dashed var(--border)}
-  .commit:last-child{border-bottom:none;padding-bottom:0}
-  .commit:first-child{padding-top:0}
-  .commit-line1{color:var(--warn)}
-  .commit-meta{color:var(--muted);font-size:.85rem}
-  .commit-msg{font-family:var(--font-sans);color:var(--fg);font-weight:700;font-size:1.05rem;margin:8px 0 10px}
-  .diff{margin:0;padding-left:18px}
-  .diff li{font-family:var(--font-sans);font-size:.92rem;line-height:1.6;list-style:none;position:relative;padding-left:6px;margin-bottom:6px;color:var(--fg)}
-  .diff li::before{content:'+';color:var(--accent);position:absolute;left:-14px}
-
-  /* json/yaml styling */
-  pre.code{margin:0;white-space:pre-wrap;word-break:break-word;font-size:.86rem}
-  .k{color:var(--key)} .s{color:var(--string)} .p{color:var(--muted)} .c{color:var(--comment)}
-  .proj-link{color:var(--key);text-decoration:none;border-bottom:1px dotted var(--key)}
-  .proj-link:hover{color:var(--accent);border-color:var(--accent)}
-
-  .md-bold{font-weight:700;color:var(--fg)}
-  .metric{font-weight:700;color:var(--accent)}
-  .chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin:6px 0 14px}
-  .chip{display:inline-block;padding:3px 10px;border-radius:20px;background:var(--chip-bg);border:1px solid var(--accent-dim);color:var(--accent);font-size:.78rem;line-height:1.4;transition:background .15s ease,transform .15s ease}
-  .chip:hover{background:var(--accent-dim);color:var(--bg);transform:translateY(-1px)}
-
-  .site-stats{display:flex;justify-content:center;margin:8px 0 28px;opacity:.7;transition:opacity .15s ease}
-  .site-stats:hover{opacity:1}
-
-  /* per-section cursor: prose reads like a text buffer, code/log sections show an editor-style block caret */
-  #summary .term-body,#achievements .term-body,#education .term-body{cursor:text}
-  #experience .term-body,#projects .term-body,#skills .term-body{cursor:var(--code-cursor)}
-  .term-body a,.term-body button,.term-body .copy-btn{cursor:pointer}
-
-  /* VS Code-style status bar */
-  .statusbar{position:fixed;left:0;right:0;bottom:0;height:26px;display:flex;align-items:center;justify-content:space-between;background:var(--accent-dim);color:var(--bg);font-size:.72rem;padding:0 12px;z-index:40;font-family:var(--font-mono)}
-  .sb-left,.sb-right{display:flex;align-items:center;gap:14px;min-width:0}
-  .sb-item{white-space:nowrap}
-  .sb-section{overflow:hidden;text-overflow:ellipsis;max-width:40vw}
-  .sb-cmdk{background:transparent;border:none;color:var(--bg);font:inherit;cursor:pointer;padding:0}
-  .sb-cmdk:hover{text-decoration:underline}
-  .sb-clock{font-variant-numeric:tabular-nums}
-  .sb-help{background:transparent;border:none;color:var(--bg);font:inherit;font-weight:700;cursor:pointer;padding:0 2px}
-  .sb-help:hover{text-decoration:underline}
-  @media (max-width:560px){ .statusbar{font-size:.66rem;padding:0 8px} .sb-item:not(.sb-section):not(.sb-cmdk):not(.sb-help){display:none} }
-
-  /* command palette */
-  .cmdk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;padding-top:12vh;z-index:200}
-  .cmdk-overlay[hidden]{display:none}
-  .cmdk{width:calc(100% - 32px);max-width:520px;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden;font-family:var(--font-mono)}
-  .cmdk-input-row{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border)}
-  .cmdk-prompt{color:var(--accent);font-weight:700}
-  .cmdk-input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font:inherit;font-size:.95rem;min-width:0}
-  .cmdk-input-row:focus-within{border-bottom-color:var(--accent)}
-  .cmdk-esc{color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:.7rem}
-  .cmdk-list{list-style:none;margin:0;padding:6px;max-height:320px;overflow-y:auto}
-  .cmdk-list li{padding:9px 12px;border-radius:6px;color:var(--fg);font-size:.85rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .cmdk-list li .cmdk-hint{color:var(--muted);font-size:.75rem;white-space:nowrap}
-  .cmdk-list li.active{background:var(--hover-overlay);color:var(--accent)}
-  .cmdk-empty{padding:14px 16px;color:var(--muted);font-size:.85rem}
-  .help-title{flex:1;color:var(--fg);font-size:.95rem}
-  .help-list li{cursor:default}
-  .help-list li .cmdk-hint{color:var(--accent)}
-  .link-btn{margin-left:8px}
-
-  /* toast */
-  .toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-size:.78rem;font-family:var(--font-mono);z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap}
-  .toast[hidden]{display:none}
-
-  /* hidden easter-egg theme */
-  :root[data-theme="matrix"]{
-    --bg:#000401; --panel:#020a04; --panel-head:#010602; --border:#0d3a1a;
-    --fg:#39ff14; --muted:#1f9c3d; --accent:#39ff14; --accent-dim:#1f9c3d;
-    --key:#7CFC00; --string:#39ff14; --comment:#1f7a30; --warn:#adff2f; --red:#ff4d4d;
-    --hover-overlay:rgba(57,255,20,.08); --chip-bg:rgba(57,255,20,.12);
-  }
-  :root[data-theme="matrix"] body{text-shadow:0 0 2px rgba(57,255,20,.25)}
-  :root[data-theme="matrix"] .toast{box-shadow:0 0 18px rgba(57,255,20,.35)}
-
-  .copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
-  .copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
-  .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
-
-  #top-btn{position:fixed;right:18px;bottom:52px;width:38px;height:38px;border-radius:6px;background:var(--panel);border:1px solid var(--border);color:var(--fg);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:50;font-family:inherit}
-  #top-btn.show{opacity:1;pointer-events:auto}
-  #top-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
-
-  ::selection{background:var(--accent-dim);color:var(--bg)}
-
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  .skip-link{position:absolute;left:8px;top:-48px;background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:4px;font-weight:600;font-size:.85rem;z-index:1000;transition:top .15s ease;text-decoration:none}
-  .skip-link:focus{top:8px}
-
-  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
-
-  @media (max-width:560px){
-    .term-body{padding:18px 16px}
-    .print-btn{position:static;margin-top:10px;margin-right:8px;display:inline-block}
-    .theme-toggle{position:static;margin-top:10px;vertical-align:middle}
-    header .term-bar,.term-bar{flex-wrap:wrap}
-    .copy-btn{margin-left:0}
-  }
-
-  .print-resume{display:none}
-
-  @media print{
-    @page{margin:0.35in;size:auto}
-    html,body{height:auto !important;overflow:visible !important;background:#fff}
-    body>*:not(.print-resume){display:none !important}
-    .print-resume{
-      --pr-accent:#0e6b45; --pr-ink:#1a1a1a; --pr-sub:#555; --pr-tint:#eef6f1; --pr-rule:#cfe3d8;
-      display:block;position:static;width:100%;height:auto;
-      background:#fff;color:var(--pr-ink);
-      font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;line-height:1.4;
-    }
-    .print-resume .p-head{border-bottom:3px solid var(--pr-accent);padding-bottom:8px;margin-bottom:12px}
-    .print-resume h1{font-size:28px;font-weight:800;letter-spacing:.01em;margin:0;color:var(--pr-accent)}
-    .print-resume .p-tagline{margin:2px 0 8px;font-size:13px;font-weight:600;color:var(--pr-sub)}
-    .print-resume .p-contacts{margin:0;font-size:9.5px;color:var(--pr-sub)}
-    .print-resume .p-contacts a{color:var(--pr-ink);text-decoration:none;font-weight:600}
-    .print-resume .p-grid{display:grid;grid-template-columns:1.55fr 1fr;column-gap:22px}
-    .print-resume h2{
-      font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
-      margin:13px 0 6px;padding-bottom:3px;border-bottom:1.5px solid var(--pr-rule);color:var(--pr-accent)
-    }
-    .print-resume .p-main h2:first-child,.print-resume .p-side h2:first-child{margin-top:0}
-    .print-resume p{margin:0 0 6px}
-    .print-resume ul{margin:2px 0 7px;padding-left:13px}
-    .print-resume li{margin:0 0 3px}
-    .print-resume li::marker{color:var(--pr-accent)}
-    .print-resume b.p-num{color:var(--pr-accent);font-weight:800}
-    .print-resume .p-job{margin-bottom:9px}
-    .print-resume .p-job-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-    .print-resume .p-job-title{font-weight:700;font-size:11.5px}
-    .print-resume .p-job-dates{font-weight:600;color:var(--pr-sub);font-size:9.5px;white-space:nowrap}
-    .print-resume .p-job-sub{font-weight:600;color:var(--pr-accent);margin-bottom:3px;font-size:10px}
-    .print-resume .p-project{margin-bottom:6px}
-    .print-resume .p-project-head{font-weight:700;font-size:10.5px}
-    .print-resume .p-project-stack{font-weight:400;color:var(--pr-sub);font-size:8.5px}
-    .print-resume .p-side{background:var(--pr-tint);border-radius:6px;padding:3px 14px 12px}
-    .print-resume .p-skill-group{margin-bottom:8px}
-    .print-resume .p-skill-group b{display:block;font-size:10px;color:var(--pr-ink);margin-bottom:3px}
-    .print-resume .p-skill-group span{font-size:9.5px;color:var(--pr-sub)}
-    .print-resume .p-side ul{padding-left:12px}
-    .print-resume .p-side li{margin-bottom:6px}
-    .print-resume .p-edu-degree{font-weight:700;font-size:10.5px}
-    .print-resume .p-edu-school{color:var(--pr-sub);font-size:9.5px}
-  }
-
-  /* Mobile print/PDF pipelines (iOS Safari, Android Chrome) ignore @page size:auto and
-     force a fixed Letter/A4 page height, so the fix here is a tighter layout that fits
-     that fixed height — not a page-size change. Scoped to touch devices via pointer:coarse
-     so desktop print (which already fits one auto-sized page) is unaffected. */
-  @media print and (pointer:coarse){
-    .print-resume{font-size:8.5px;line-height:1.25}
-    .print-resume h1{font-size:24px}
-    .print-resume .p-tagline{font-size:11px;margin:2px 0 6px}
-    .print-resume .p-contacts{font-size:8px}
-    .print-resume h2{font-size:10px;margin:10px 0 5px;padding-bottom:2px}
-    .print-resume p{margin:0 0 4px}
-    .print-resume ul{margin:2px 0 5px}
-    .print-resume li{margin:0 0 2px}
-    .print-resume .p-job{margin-bottom:7px}
-    .print-resume .p-job-title{font-size:10px}
-    .print-resume .p-job-dates{font-size:8px}
-    .print-resume .p-job-sub{font-size:8.5px;margin-bottom:2px}
-    .print-resume .p-project{margin-bottom:5px}
-    .print-resume .p-project-head{font-size:9px}
-    .print-resume .p-project-stack{font-size:7.5px}
-    .print-resume .p-skill-group{margin-bottom:6px}
-    .print-resume .p-skill-group b{font-size:8.5px;margin-bottom:2px}
-    .print-resume .p-skill-group span{font-size:8px}
-    .print-resume .p-side li{margin-bottom:4px}
-    .print-resume .p-edu-degree{font-size:9px}
-    .print-resume .p-edu-school{font-size:8px}
-  }
-</style>
-<script data-goatcounter="https://shubh9457.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-</head>
-<body>
+---
+layout: base
+title: "Shubh Saxena — Lead Engineer, Distributed Systems & Golang | Resume"
+description: "Shubh Saxena — Lead Engineer with 6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles. Experience, projects & resume."
+robots: "index, follow"
+google_site_verification: "FtIZ4SRIII2GXykUc0CtawvQ9feIE1Du3CHakF9p0o0"
+author: "Shubh Saxena"
+canonical: "https://shubh9457.github.io/"
+alternate_json: true
+inline_svg_icon: true
+theme_color: "#0a0e12"
+jsonld: true
+analytics: true
+og_type: website
+og_title: "Shubh Saxena — Lead Engineer, Distributed Systems & Golang"
+og_description: "6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles."
+og_image: "https://shubh9457.github.io/og-image.png"
+og_image_type: "image/png"
+og_image_width: 1200
+og_image_height: 630
+twitter_title: "Shubh Saxena — Lead Engineer, Distributed Systems & Golang"
+twitter_description: "6+ years building high-availability distributed systems at scale (Go, Node.js, Kafka). Open to Staff/Principal Engineer roles."
+twitter_image: "https://shubh9457.github.io/og-image.png"
+extra_css: /assets/css/index.css
+sb_section: "readme.md"
+cmdk_placeholder: "Type a command or section…"
+shortcuts:
+  - label: "Next / previous section"
+    hint: "j / k"
+  - label: "Command palette"
+    hint: "⌘K / Ctrl+K"
+  - label: "This help"
+    hint: "?"
+  - label: "Close any overlay"
+    hint: "esc"
+  - label: "Copy section link"
+    hint: "⛓ link button"
+  - label: "Print / save PDF"
+    hint: "⌘P"
+---
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <div class="print-resume" aria-hidden="true">
@@ -487,7 +132,6 @@
 </div>
 
 <div id="bgfx"></div>
-<canvas id="matrix-rain" aria-hidden="true" hidden></canvas>
 <div id="progress"></div>
 
 <div class="wrap">
@@ -671,85 +315,28 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
 
 </div>
 
-<button id="top-btn" title="Back to top" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
-
-<div class="statusbar" role="status" aria-label="Site status bar">
-  <div class="sb-left">
-    <span class="sb-item">⎇ main</span>
-    <span class="sb-item sb-section" id="sb-section">readme.md</span>
-  </div>
-  <div class="sb-right">
-    <span class="sb-item">UTF-8</span>
-    <span class="sb-item">LF</span>
-    <span class="sb-item sb-clock" id="sb-clock"></span>
-    <button class="sb-item sb-help" type="button" id="sb-help-btn" title="Keyboard shortcuts (?)">?</button>
-    <button class="sb-item sb-cmdk" type="button" id="sb-cmdk-btn">⌘K commands</button>
-  </div>
-</div>
-
-<div class="cmdk-overlay" id="cmdk-overlay" hidden>
-  <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
-    <div class="cmdk-input-row">
-      <span class="cmdk-prompt" aria-hidden="true">›</span>
-      <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Type a command or section…" autocomplete="off" spellcheck="false" aria-label="Command palette input">
-      <kbd class="cmdk-esc">esc</kbd>
-    </div>
-    <ul class="cmdk-list" id="cmdk-list"></ul>
-  </div>
-</div>
-
-<div class="cmdk-overlay" id="help-overlay" hidden>
-  <div class="cmdk help-panel" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
-    <div class="cmdk-input-row">
-      <span class="cmdk-prompt" aria-hidden="true">?</span>
-      <span class="help-title">Keyboard shortcuts</span>
-      <kbd class="cmdk-esc">esc</kbd>
-    </div>
-    <ul class="cmdk-list help-list">
-      <li><span>Next / previous section</span><span class="cmdk-hint">j / k</span></li>
-      <li><span>Command palette</span><span class="cmdk-hint">⌘K / Ctrl+K</span></li>
-      <li><span>This help</span><span class="cmdk-hint">?</span></li>
-      <li><span>Close any overlay</span><span class="cmdk-hint">esc</span></li>
-      <li><span>Copy section link</span><span class="cmdk-hint">⛓ link button</span></li>
-      <li><span>Print / save PDF</span><span class="cmdk-hint">⌘P</span></li>
-    </ul>
-  </div>
-</div>
-
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
 <script>
+window.SITE_COMMANDS = [
+  {label: 'Go to readme.md — Summary', run: function(){ Site.scrollToId('summary'); }},
+  {label: 'Go to experience.log — Experience', run: function(){ Site.scrollToId('experience'); }},
+  {label: 'Go to projects.json — Projects', run: function(){ Site.scrollToId('projects'); }},
+  {label: 'Go to skills.yaml — Skills', run: function(){ Site.scrollToId('skills'); }},
+  {label: 'Go to achievements.md — Achievements', run: function(){ Site.scrollToId('achievements'); }},
+  {label: 'Go to education.txt — Education', run: function(){ Site.scrollToId('education'); }},
+  {label: 'Toggle theme', hint: 'dark/light', run: function(){ Site.toggleTheme(); }},
+  {label: 'Copy email address', hint: 'ssshubh97@gmail.com', run: function(){ navigator.clipboard && navigator.clipboard.writeText('ssshubh97@gmail.com'); }},
+  {label: 'Open LinkedIn', hint: '↗ opens new tab', run: function(){ window.open('https://www.linkedin.com/in/shubh-saxena/', '_blank', 'noopener'); }},
+  {label: 'Open GitHub', hint: '↗ opens new tab', run: function(){ window.open('https://github.com/shubh9457', '_blank', 'noopener'); }},
+  {label: 'Open Medium', hint: '↗ opens new tab', run: function(){ window.open('https://medium.com/@shubhsaxena', '_blank', 'noopener'); }},
+  {label: 'Open LeetCode', hint: '↗ opens new tab', run: function(){ window.open('https://leetcode.com/shubhsaxena/', '_blank', 'noopener'); }},
+  {label: 'Print / save as PDF', hint: '⌘P', run: function(){ window.print(); }},
+  {label: 'Scroll to top', run: function(){ Site.scrollToTop(); }},
+  {label: 'Show keyboard shortcuts', hint: '?', run: function(){ Site.openHelp(); }},
+  {label: 'Open resume.json', hint: 'machine-readable', run: function(){ window.open('/resume.json', '_blank', 'noopener'); }}
+];
+
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // theme toggle
-  var toggleBtn = document.getElementById('theme-toggle');
-  var icon = document.getElementById('theme-icon');
-  function syncToggle(){
-    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    toggleBtn.setAttribute('aria-pressed', String(isLight));
-    icon.textContent = isLight ? '☀️' : '🌙';
-    var tcm = document.getElementById('theme-color-meta');
-    if (tcm) tcm.setAttribute('content', isLight ? '#f3f4f6' : '#0a0e12');
-  }
-  syncToggle();
-  toggleBtn.addEventListener('click', function(){
-    var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    if (!reduce) {
-      icon.style.transform = 'rotate(90deg) scale(.4)';
-      icon.style.opacity = '0';
-      setTimeout(function(){
-        document.documentElement.setAttribute('data-theme', next);
-        syncToggle();
-        icon.style.transform = 'rotate(0deg) scale(1)';
-        icon.style.opacity = '1';
-      }, 160);
-    } else {
-      document.documentElement.setAttribute('data-theme', next);
-      syncToggle();
-    }
-    try{ localStorage.setItem('theme', next); }catch(e){}
-  });
 
   // copy-to-clipboard on each source block
   document.querySelectorAll('.copy-btn[data-copy]').forEach(function(btn){
@@ -785,15 +372,6 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     });
   });
 
-  // live clock in status bar
-  var sbClock = document.getElementById('sb-clock');
-  function updateClock(){
-    if (!sbClock) return;
-    sbClock.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-  }
-  updateClock();
-  setInterval(updateClock, 30000);
-
   // cursor-tracked glow on each terminal panel
   if (!reduce && window.matchMedia('(hover: hover)').matches) {
     document.querySelectorAll('.term').forEach(function(term){
@@ -804,19 +382,6 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
       });
     });
   }
-
-  // scroll progress + back-to-top
-  var progress = document.getElementById('progress');
-  var topBtn = document.getElementById('top-btn');
-  function onScroll(){
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-    progress.style.width = pct + '%';
-    topBtn.classList.toggle('show', h.scrollTop > 400);
-  }
-  document.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
 
   // one-time boot sequence in the header terminal
   var bootLines = [
@@ -907,255 +472,6 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     if (target) target.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
   });
 
-  // command palette
-  var cmdkOverlay = document.getElementById('cmdk-overlay');
-  var cmdkInput = document.getElementById('cmdk-input');
-  var cmdkList = document.getElementById('cmdk-list');
-  var cmdkLastFocused = null;
-
-  function scrollToId(id){
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
-  }
-
-  var commands = [
-    {label: 'Go to readme.md — Summary', run: function(){ scrollToId('summary'); }},
-    {label: 'Go to experience.log — Experience', run: function(){ scrollToId('experience'); }},
-    {label: 'Go to projects.json — Projects', run: function(){ scrollToId('projects'); }},
-    {label: 'Go to skills.yaml — Skills', run: function(){ scrollToId('skills'); }},
-    {label: 'Go to achievements.md — Achievements', run: function(){ scrollToId('achievements'); }},
-    {label: 'Go to education.txt — Education', run: function(){ scrollToId('education'); }},
-    {label: 'Toggle theme', hint: 'dark/light', run: function(){ var t = document.getElementById('theme-toggle'); if (t) t.click(); }},
-    {label: 'Copy email address', hint: 'ssshubh97@gmail.com', run: function(){ navigator.clipboard && navigator.clipboard.writeText('ssshubh97@gmail.com'); }},
-    {label: 'Open LinkedIn', hint: '↗ opens new tab', run: function(){ window.open('https://www.linkedin.com/in/shubh-saxena/', '_blank', 'noopener'); }},
-    {label: 'Open GitHub', hint: '↗ opens new tab', run: function(){ window.open('https://github.com/shubh9457', '_blank', 'noopener'); }},
-    {label: 'Open Medium', hint: '↗ opens new tab', run: function(){ window.open('https://medium.com/@shubhsaxena', '_blank', 'noopener'); }},
-    {label: 'Open LeetCode', hint: '↗ opens new tab', run: function(){ window.open('https://leetcode.com/shubhsaxena/', '_blank', 'noopener'); }},
-    {label: 'Print / save as PDF', hint: '⌘P', run: function(){ window.print(); }},
-    {label: 'Scroll to top', run: function(){ window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}); }},
-    {label: 'Show keyboard shortcuts', hint: '?', run: function(){ helpOpen(); }},
-    {label: 'Open resume.json', hint: 'machine-readable', run: function(){ window.open('/resume.json', '_blank', 'noopener'); }}
-  ];
-
-  function cmdkFiltered(){
-    var q = cmdkInput.value.trim().toLowerCase();
-    if (!q) return commands;
-    return commands.filter(function(c){ return c.label.toLowerCase().indexOf(q) !== -1; });
-  }
-
-  function cmdkRender(){
-    var matches = cmdkFiltered();
-    cmdkList.innerHTML = '';
-    if (!matches.length){
-      var empty = document.createElement('div');
-      empty.className = 'cmdk-empty';
-      empty.textContent = 'No matching commands';
-      cmdkList.appendChild(empty);
-      return;
-    }
-    matches.forEach(function(c, i){
-      var li = document.createElement('li');
-      li.setAttribute('role', 'option');
-      if (i === 0) li.classList.add('active');
-      var label = document.createElement('span');
-      label.textContent = c.label;
-      li.appendChild(label);
-      if (c.hint){
-        var hint = document.createElement('span');
-        hint.className = 'cmdk-hint';
-        hint.textContent = c.hint;
-        li.appendChild(hint);
-      }
-      li.addEventListener('click', function(){ cmdkRun(c); });
-      cmdkList.appendChild(li);
-    });
-  }
-
-  function cmdkRun(c){
-    cmdkClose();
-    c.run();
-  }
-
-  function cmdkOpen(){
-    cmdkLastFocused = document.activeElement;
-    cmdkOverlay.hidden = false;
-    cmdkInput.value = '';
-    cmdkRender();
-    cmdkInput.focus();
-  }
-
-  function cmdkClose(){
-    cmdkOverlay.hidden = true;
-    if (cmdkLastFocused && cmdkLastFocused.focus) cmdkLastFocused.focus();
-  }
-
-  cmdkInput.addEventListener('input', cmdkRender);
-
-  cmdkInput.addEventListener('keydown', function(e){
-    var items = cmdkList.querySelectorAll('li');
-    if (e.key === 'Escape'){ e.preventDefault(); cmdkClose(); return; }
-    if (!items.length) return;
-    var activeIdx = -1;
-    items.forEach(function(li, i){ if (li.classList.contains('active')) activeIdx = i; });
-    if (e.key === 'ArrowDown'){
-      e.preventDefault();
-      if (items[activeIdx]) items[activeIdx].classList.remove('active');
-      var next = items[Math.min(activeIdx + 1, items.length - 1)];
-      next.classList.add('active');
-      next.scrollIntoView({block: 'nearest'});
-    } else if (e.key === 'ArrowUp'){
-      e.preventDefault();
-      if (items[activeIdx]) items[activeIdx].classList.remove('active');
-      var prev = items[Math.max(activeIdx - 1, 0)];
-      prev.classList.add('active');
-      prev.scrollIntoView({block: 'nearest'});
-    } else if (e.key === 'Enter'){
-      e.preventDefault();
-      var matches = cmdkFiltered();
-      var idx = activeIdx === -1 ? 0 : activeIdx;
-      if (matches[idx]) cmdkRun(matches[idx]);
-    }
-  });
-
-  cmdkOverlay.addEventListener('click', function(e){ if (e.target === cmdkOverlay) cmdkClose(); });
-
-  document.addEventListener('keydown', function(e){
-    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')){
-      e.preventDefault();
-      if (cmdkOverlay.hidden) cmdkOpen(); else cmdkClose();
-    }
-  });
-
-  var sbCmdkBtn = document.getElementById('sb-cmdk-btn');
-  if (sbCmdkBtn) sbCmdkBtn.addEventListener('click', cmdkOpen);
-
-  // keyboard-shortcuts help overlay
-  var helpOverlay = document.getElementById('help-overlay');
-  var helpLastFocused = null;
-
-  function helpOpen(){
-    helpLastFocused = document.activeElement;
-    helpOverlay.hidden = false;
-  }
-
-  function helpClose(){
-    helpOverlay.hidden = true;
-    if (helpLastFocused && helpLastFocused.focus) helpLastFocused.focus();
-  }
-
-  helpOverlay.addEventListener('click', function(e){ if (e.target === helpOverlay) helpClose(); });
-
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && !helpOverlay.hidden){ helpClose(); return; }
-    if (e.metaKey || e.ctrlKey || e.altKey || e.key !== '?') return;
-    var active = document.activeElement;
-    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) return;
-    e.preventDefault();
-    if (helpOverlay.hidden) helpOpen(); else helpClose();
-  });
-
-  var sbHelpBtn = document.getElementById('sb-help-btn');
-  if (sbHelpBtn) sbHelpBtn.addEventListener('click', helpOpen);
-
-  // toast helper
-  var toastEl = document.getElementById('toast');
-  var toastTimer = null;
-  function showToast(msg){
-    if (!toastEl) return;
-    toastEl.textContent = msg;
-    toastEl.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toastEl.hidden = true; }, 2600);
-  }
-
-  // konami code easter egg -> hidden "matrix" theme
-  var konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  var konamiPos = 0;
-  // matrix digital-rain background
-  var matrixCanvas = document.getElementById('matrix-rain');
-  var matrixCtx = matrixCanvas ? matrixCanvas.getContext('2d') : null;
-  var matrixRAF = null;
-  var matrixCols = [];
-  var matrixFontSize = 16;
-  var matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン0123456789';
-
-  function matrixResize(){
-    if (!matrixCanvas) return;
-    matrixCanvas.width = window.innerWidth;
-    matrixCanvas.height = window.innerHeight;
-    var columns = Math.ceil(matrixCanvas.width / matrixFontSize);
-    matrixCols = new Array(columns).fill(0);
-  }
-
-  function matrixDraw(){
-    if (!matrixCtx) return;
-    matrixCtx.fillStyle = 'rgba(0,4,1,0.09)';
-    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-    matrixCtx.fillStyle = '#39ff14';
-    matrixCtx.font = matrixFontSize + 'px monospace';
-    for (var i = 0; i < matrixCols.length; i++){
-      var ch = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-      var x = i * matrixFontSize;
-      var y = matrixCols[i] * matrixFontSize;
-      matrixCtx.fillText(ch, x, y);
-      if (y > matrixCanvas.height && Math.random() > 0.975) matrixCols[i] = 0;
-      matrixCols[i]++;
-    }
-    matrixRAF = requestAnimationFrame(matrixDraw);
-  }
-
-  function matrixStart(){
-    if (!matrixCanvas || !matrixCtx || reduce) return;
-    matrixCanvas.hidden = false;
-    matrixResize();
-    matrixCtx.fillStyle = '#000401';
-    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-    if (matrixRAF) cancelAnimationFrame(matrixRAF);
-    matrixDraw();
-  }
-
-  function matrixStop(){
-    if (matrixRAF) cancelAnimationFrame(matrixRAF);
-    matrixRAF = null;
-    if (matrixCanvas) matrixCanvas.hidden = true;
-  }
-
-  window.addEventListener('resize', function(){
-    if (matrixCanvas && !matrixCanvas.hidden) matrixResize();
-  });
-
-  function toggleMatrixTheme(){
-    var root = document.documentElement;
-    var current = root.getAttribute('data-theme');
-    if (current === 'matrix'){
-      var prev = sessionStorage.getItem('theme-before-matrix') || 'dark';
-      root.setAttribute('data-theme', prev);
-      try{ localStorage.setItem('theme', prev); }catch(e){}
-      matrixStop();
-      showToast('matrix mode: disengaged');
-    } else {
-      try{ sessionStorage.setItem('theme-before-matrix', current || 'dark'); }catch(e){}
-      root.setAttribute('data-theme', 'matrix');
-      try{ localStorage.setItem('theme', 'matrix'); }catch(e){}
-      matrixStart();
-      showToast(reduce ? 'sudo access granted — matrix mode engaged (motion reduced)' : 'sudo access granted — wake up, Neo…');
-    }
-  }
-  if (document.documentElement.getAttribute('data-theme') === 'matrix') matrixStart();
-
-  document.addEventListener('keydown', function(e){
-    var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-    if (key === konamiSeq[konamiPos]){
-      konamiPos++;
-      if (konamiPos === konamiSeq.length){
-        konamiPos = 0;
-        toggleMatrixTheme();
-      }
-    } else {
-      konamiPos = (key === konamiSeq[0]) ? 1 : 0;
-    }
-  });
-
   // traffic-light dots: real window-control-style behavior
   var dotClose = document.getElementById('dot-close');
   var dotMinimize = document.getElementById('dot-minimize');
@@ -1178,13 +494,13 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     var idx = Math.floor(Math.random() * closeMessages.length);
     if (idx === lastCloseMsgIdx) idx = (idx + 1) % closeMessages.length;
     lastCloseMsgIdx = idx;
-    showToast(closeMessages[idx]);
+    Site.showToast(closeMessages[idx]);
   });
 
   if (dotMinimize) dotMinimize.addEventListener('click', function(){
     var minimized = document.body.classList.toggle('minimized');
     dotMinimize.setAttribute('aria-pressed', minimized ? 'true' : 'false');
-    showToast(minimized ? 'minimized — click the yellow dot to restore' : 'restored');
+    Site.showToast(minimized ? 'minimized — click the yellow dot to restore' : 'restored');
     if (!minimized) return;
     if (!reduce) window.scrollTo({top: 0, behavior: 'smooth'});
   });
@@ -1193,10 +509,10 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
     var el = document.documentElement;
     if (!document.fullscreenElement){
       var req = el.requestFullscreen || el.webkitRequestFullscreen;
-      if (!req){ showToast('fullscreen not supported here'); return; }
+      if (!req){ Site.showToast('fullscreen not supported here'); return; }
       Promise.resolve(req.call(el)).then(function(){
         dotFullscreen.setAttribute('aria-pressed', 'true');
-      }).catch(function(){ showToast("couldn't enter fullscreen"); });
+      }).catch(function(){ Site.showToast("couldn't enter fullscreen"); });
     } else {
       var exit = document.exitFullscreen || document.webkitExitFullscreen;
       if (exit) Promise.resolve(exit.call(document)).then(function(){
@@ -1210,6 +526,3 @@ APJ Abdul Kalam Technical University · 2016 – 2019</pre>
   });
 })();
 </script>
-
-</body>
-</html>
