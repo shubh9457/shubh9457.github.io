@@ -1,0 +1,206 @@
+/* Page-unique styles for index.html — resume terminal chrome, tab bar,
+   experience/skills/print sections. Shared chrome lives in theme.css. */
+.term,.term-bar,nav.tabbar,#top-btn{transition:background-color .25s ease, border-color .25s ease, box-shadow .25s ease}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--font-mono);
+  font-size:14.5px; line-height:1.7; overflow-x:hidden; position:relative;
+}
+
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);z-index:100;transition:width .1s linear}
+
+.wrap{max-width:800px;margin:0 auto;padding:40px 20px 80px;position:relative;z-index:1}
+
+/* terminal window chrome, reused for header + every section */
+.term{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.term::before{content:'';position:absolute;left:var(--mx,50%);top:var(--my,50%);width:420px;height:420px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle, var(--accent) 0%, transparent 70%);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:0}
+@media (hover:hover){
+  .term:hover::before{opacity:.07}
+  .term:hover{transform:translateY(-2px);box-shadow:var(--shadow),0 0 0 1px var(--accent-dim)}
+}
+.term-bar{position:relative;z-index:1;display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--panel-head);border-bottom:1px solid var(--border)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:none;padding:0;cursor:pointer;transition:filter .12s ease,transform .12s ease}
+.dot:hover{filter:brightness(1.2);transform:scale(1.15)}
+.dot:active{filter:brightness(.85);transform:scale(.95)}
+.dot.r{background:#ff5f56} .dot.y{background:#ffbd2e} .dot.g{background:#27c93f}
+body.minimized nav.tabbar,body.minimized main,body.minimized .site-stats{display:none}
+.term-title{margin-left:8px;color:var(--muted);font-size:.78rem}
+.last-commit{margin-left:14px;color:var(--muted);font-size:.72rem;white-space:nowrap}
+.last-commit::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:1px}
+@media (max-width:560px){ .last-commit{display:none} }
+.term-body{position:relative;z-index:1;padding:22px 26px}
+.print-btn{position:absolute;top:9px;right:80px;background:transparent;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;transition:background .15s ease,color .15s ease}
+.print-btn:hover{background:var(--accent);color:var(--bg)}
+
+.theme-toggle{position:absolute;top:8px;right:14px}
+
+.prompt{color:var(--accent)}
+.prompt::before{content:'$ ';color:var(--muted)}
+.name{font-family:var(--font-sans);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:2px 0 2px;
+  background:linear-gradient(90deg, var(--fg) 0%, var(--accent) 50%, var(--fg) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:name-sheen 6s ease-in-out infinite}
+@keyframes name-sheen{0%{background-position:0% 0}50%{background-position:100% 0}100%{background-position:0% 0}}
+@media (prefers-reduced-motion: reduce){ .name{animation:none;background-position:0% 0} }
+@media (prefers-reduced-motion: reduce){ .dot:hover,.dot:active{transform:none} }
+#boot{white-space:pre-wrap;min-height:5.2em}
+#boot .comment{color:var(--comment)}
+#boot .out{color:var(--fg)}
+#boot .warn{color:var(--yellow)}
+.cursor{display:inline-block;width:8px;height:1.1em;background:var(--accent);vertical-align:text-bottom;margin-left:4px;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
+
+.contacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.contacts a{display:inline-flex;align-items:center;gap:5px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;font-size:.8rem;transition:.15s ease}
+.contacts a:hover{color:var(--accent);border-color:var(--accent-dim)}
+.contacts a::before{content:'./';color:var(--muted)}
+.contacts a.cta{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
+.contacts a.cta::before{content:none}
+.contacts a.cta:hover{filter:brightness(1.1);color:var(--bg)}
+.link-icon{color:var(--accent);font-weight:700;font-size:.82em;line-height:1}
+
+/* tab bar nav, VSCode-style */
+.tabbar-wrap{position:sticky;top:0;z-index:20;border-radius:8px 8px 0 0}
+nav.tabbar{display:flex;overflow-x:auto;background:var(--panel-head);border:1px solid var(--border);border-radius:8px 8px 0 0;scrollbar-width:none}
+nav.tabbar::-webkit-scrollbar{display:none}
+nav.tabbar a{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.78rem;color:var(--muted);text-decoration:none;border-right:1px solid var(--border);border-top:2px solid transparent;background:transparent;transition:.15s ease}
+nav.tabbar a .ext{color:var(--comment)}
+nav.tabbar a:hover{color:var(--fg);background:var(--hover-overlay)}
+nav.tabbar a.active{color:var(--fg);background:var(--panel);border-top-color:var(--accent)}
+.kbd-hint{margin-left:auto;align-self:center;padding-right:14px;color:var(--muted);font-size:.7rem;white-space:nowrap}
+@media (max-width:700px){ .kbd-hint{display:none} }
+.tabbar-wrap::before,.tabbar-wrap::after{content:'';position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;z-index:1}
+.tabbar-wrap::before{left:1px;background:linear-gradient(90deg, var(--panel-head), transparent);border-radius:8px 0 0 0}
+.tabbar-wrap::after{right:1px;background:linear-gradient(270deg, var(--panel-head), transparent);border-radius:0 8px 0 0}
+.tabbar-spacer{height:1px}
+
+section{margin-bottom:0;opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease;scroll-margin-top:52px}
+section.in{opacity:1;transform:translateY(0)}
+section .term{border-radius:0 0 8px 8px;border-top:none;margin-top:0;margin-bottom:26px}
+section:first-of-type .term{border-radius:8px}
+
+p{margin:0 0 10px}
+p:last-child{margin-bottom:0}
+
+/* git-log style experience entries */
+.commit{padding:14px 0;border-bottom:1px dashed var(--border)}
+.commit:last-child{border-bottom:none;padding-bottom:0}
+.commit:first-child{padding-top:0}
+.commit-line1{color:var(--yellow)}
+.commit-meta{color:var(--muted);font-size:.85rem}
+.commit-msg{font-family:var(--font-sans);color:var(--fg);font-weight:700;font-size:1.05rem;margin:8px 0 10px}
+.diff{margin:0;padding-left:18px}
+.diff li{font-family:var(--font-sans);font-size:.92rem;line-height:1.6;list-style:none;position:relative;padding-left:6px;margin-bottom:6px;color:var(--fg)}
+.diff li::before{content:'+';color:var(--accent);position:absolute;left:-14px}
+
+/* json/yaml styling */
+pre.code{margin:0;white-space:pre-wrap;word-break:break-word;font-size:.86rem}
+.k{color:var(--blue)} .s{color:var(--orange)} .p{color:var(--muted)} .c{color:var(--comment)}
+.proj-link{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.proj-link:hover{color:var(--accent);border-color:var(--accent)}
+
+.md-bold{font-weight:700;color:var(--fg)}
+.metric{font-weight:700;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin:6px 0 14px}
+.chip{display:inline-block;padding:3px 10px;border-radius:20px;background:var(--chip-bg);border:1px solid var(--accent-dim);color:var(--accent);font-size:.78rem;line-height:1.4;transition:background .15s ease,transform .15s ease}
+.chip:hover{background:var(--accent-dim);color:var(--bg);transform:translateY(-1px)}
+
+/* per-section cursor: prose reads like a text buffer, code/log sections show an editor-style block caret */
+#summary .term-body,#achievements .term-body,#education .term-body{cursor:text}
+#experience .term-body,#projects .term-body,#skills .term-body{cursor:var(--code-cursor)}
+.term-body a,.term-body button,.term-body .copy-btn{cursor:pointer}
+
+.link-btn{margin-left:8px}
+
+.copy-btn{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:2px 9px;border-radius:4px;cursor:pointer;font-family:inherit;transition:color .15s ease,border-color .15s ease}
+.copy-btn:hover{color:var(--accent);border-color:var(--accent-dim)}
+.copy-btn.copied{color:var(--accent);border-color:var(--accent)}
+
+.skip-link{position:absolute;left:8px;top:-48px;background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:4px;font-weight:600;font-size:.85rem;z-index:1000;transition:top .15s ease;text-decoration:none}
+.skip-link:focus{top:8px}
+
+@media (max-width:560px){
+  .term-body{padding:18px 16px}
+  .print-btn{position:static;margin-top:10px;margin-right:8px;display:inline-block}
+  .theme-toggle{position:static;margin-top:10px;vertical-align:middle}
+  header .term-bar,.term-bar{flex-wrap:wrap}
+  .copy-btn{margin-left:0}
+}
+
+.print-resume{display:none}
+
+@media print{
+  @page{margin:0.35in;size:auto}
+  html,body{height:auto !important;overflow:visible !important;background:#fff}
+  body>*:not(.print-resume){display:none !important}
+  .print-resume{
+    --pr-accent:#0e6b45; --pr-ink:#1a1a1a; --pr-sub:#555; --pr-tint:#eef6f1; --pr-rule:#cfe3d8;
+    display:block;position:static;width:100%;height:auto;
+    background:#fff;color:var(--pr-ink);
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;line-height:1.4;
+  }
+  .print-resume .p-head{border-bottom:3px solid var(--pr-accent);padding-bottom:8px;margin-bottom:12px}
+  .print-resume .p-name{font-size:28px;font-weight:800;letter-spacing:.01em;margin:0;color:var(--pr-accent)}
+  .print-resume .p-tagline{margin:2px 0 8px;font-size:13px;font-weight:600;color:var(--pr-sub)}
+  .print-resume .p-contacts{margin:0;font-size:9.5px;color:var(--pr-sub)}
+  .print-resume .p-contacts a{color:var(--pr-ink);text-decoration:none;font-weight:600}
+  .print-resume .p-grid{display:grid;grid-template-columns:1.55fr 1fr;column-gap:22px}
+  .print-resume h2{
+    font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+    margin:13px 0 6px;padding-bottom:3px;border-bottom:1.5px solid var(--pr-rule);color:var(--pr-accent)
+  }
+  .print-resume .p-main h2:first-child,.print-resume .p-side h2:first-child{margin-top:0}
+  .print-resume p{margin:0 0 6px}
+  .print-resume ul{margin:2px 0 7px;padding-left:13px}
+  .print-resume li{margin:0 0 3px}
+  .print-resume li::marker{color:var(--pr-accent)}
+  .print-resume b.p-num{color:var(--pr-accent);font-weight:800}
+  .print-resume .p-job{margin-bottom:9px}
+  .print-resume .p-job-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .print-resume .p-job-title{font-weight:700;font-size:11.5px}
+  .print-resume .p-job-dates{font-weight:600;color:var(--pr-sub);font-size:9.5px;white-space:nowrap}
+  .print-resume .p-job-sub{font-weight:600;color:var(--pr-accent);margin-bottom:3px;font-size:10px}
+  .print-resume .p-project{margin-bottom:6px}
+  .print-resume .p-project-head{font-weight:700;font-size:10.5px}
+  .print-resume .p-project-stack{font-weight:400;color:var(--pr-sub);font-size:8.5px}
+  .print-resume .p-side{background:var(--pr-tint);border-radius:6px;padding:3px 14px 12px}
+  .print-resume .p-skill-group{margin-bottom:8px}
+  .print-resume .p-skill-group b{display:block;font-size:10px;color:var(--pr-ink);margin-bottom:3px}
+  .print-resume .p-skill-group span{font-size:9.5px;color:var(--pr-sub)}
+  .print-resume .p-side ul{padding-left:12px}
+  .print-resume .p-side li{margin-bottom:6px}
+  .print-resume .p-edu-degree{font-weight:700;font-size:10.5px}
+  .print-resume .p-edu-school{color:var(--pr-sub);font-size:9.5px}
+}
+
+/* Mobile print/PDF pipelines (iOS Safari, Android Chrome) ignore @page size:auto and
+   force a fixed Letter/A4 page height, so the fix here is a tighter layout that fits
+   that fixed height — not a page-size change. Scoped to touch devices via pointer:coarse
+   so desktop print (which already fits one auto-sized page) is unaffected. */
+@media print and (pointer:coarse){
+  .print-resume{font-size:8.5px;line-height:1.25}
+  .print-resume .p-name{font-size:24px}
+  .print-resume .p-tagline{font-size:11px;margin:2px 0 6px}
+  .print-resume .p-contacts{font-size:8px}
+  .print-resume h2{font-size:10px;margin:10px 0 5px;padding-bottom:2px}
+  .print-resume p{margin:0 0 4px}
+  .print-resume ul{margin:2px 0 5px}
+  .print-resume li{margin:0 0 2px}
+  .print-resume .p-job{margin-bottom:7px}
+  .print-resume .p-job-title{font-size:10px}
+  .print-resume .p-job-dates{font-size:8px}
+  .print-resume .p-job-sub{font-size:8.5px;margin-bottom:2px}
+  .print-resume .p-project{margin-bottom:5px}
+  .print-resume .p-project-head{font-size:9px}
+  .print-resume .p-project-stack{font-size:7.5px}
+  .print-resume .p-skill-group{margin-bottom:6px}
+  .print-resume .p-skill-group b{font-size:8.5px;margin-bottom:2px}
+  .print-resume .p-skill-group span{font-size:8px}
+  .print-resume .p-side li{margin-bottom:4px}
+  .print-resume .p-edu-degree{font-size:9px}
+  .print-resume .p-edu-school{font-size:8px}
+}
