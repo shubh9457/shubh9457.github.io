@@ -407,11 +407,12 @@ window.SITE_COMMANDS = [
   } else {
     var li = 0, ci = 0;
     var built = [];
+    var CHARS_PER_TICK = 3;
     function typeTick(){
       if (li >= bootLines.length) { bootEl.innerHTML = built.join('') + '<span class="cursor"></span>'; return; }
       var line = bootLines[li];
       if (line.t === 'blank') { built.push('\n'); li++; setTimeout(typeTick, 120); return; }
-      ci++;
+      ci = Math.min(ci + CHARS_PER_TICK, line.text.length);
       var partial = built.join('') + '<span class="' + line.t + '">' + line.text.slice(0, ci) + '</span>';
       bootEl.innerHTML = partial + '<span class="cursor"></span>';
       if (ci === line.text.length) {
